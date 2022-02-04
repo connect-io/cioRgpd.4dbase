@@ -1,0 +1,34 @@
+# Générique
+*.Ink
+*.pst
+*.swp
+*.tmp
+*.temp
+*.DS_Store
+.DS_Store
+
+# Propre à 4D
+*.journal
+userPreferences.*
+Data/**
+Logs/**
+Plugins/cache/**
+Project/DerivedData/**
+Project/Trash/**
+Ressources/cache/**
+*.4DB
+*.4DC
+*.4DD
+*.4DK
+*.4DIndx
+*.4DIndy
+*.Match
+
+#optionnel
+Settings/**
+
+
+
+# Pour mettre à jour le repositorie en fonction du .gitignore
+# git rm -r --cached .
+# git add .

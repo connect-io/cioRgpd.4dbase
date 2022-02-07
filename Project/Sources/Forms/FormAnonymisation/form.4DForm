@@ -31,7 +31,7 @@
 					"height": 40,
 					"sizingX": "grow",
 					"stroke": "transparent",
-					"class": "accentBackColor3",
+					"class": "",
 					"fill": "#424242"
 				},
 				"Texte": {
@@ -44,7 +44,8 @@
 					"fontSize": 24,
 					"stroke": "#FFFFFF",
 					"textAlign": "center",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"sizingX": "move"
 				},
 				"Texte1": {
 					"type": "text",
@@ -110,7 +111,7 @@
 					"currentItemSource": "Form:C1466.elementCourant",
 					"currentItemPositionSource": "Form:C1466.elementPosition",
 					"selectedItemsSource": "Form:C1466.elementSelection",
-					"scrollbarHorizontal": "hidden",
+					"scrollbarHorizontal": "automatic",
 					"horizontalLineStroke": "transparent",
 					"verticalLineStroke": "transparent",
 					"verticalAlign": "middle",
@@ -134,9 +135,9 @@
 								"onDataChange"
 							],
 							"header": {
-								"name": "Header1",
+								"name": "Entête1",
 								"verticalAlign": "middle",
-								"text": "Header1"
+								"text": ""
 							},
 							"footer": {
 								"name": "Footer1",
@@ -161,12 +162,13 @@
 					"events": [
 						"onClick"
 					],
-					"right": 598
+					"right": 598,
+					"sizingX": "grow"
 				}
 			}
 		}
 	],
-	"geometryStamp": 80,
+	"geometryStamp": 86,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

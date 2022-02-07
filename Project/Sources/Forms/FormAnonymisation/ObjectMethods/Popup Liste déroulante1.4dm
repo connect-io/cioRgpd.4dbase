@@ -1,5 +1,5 @@
 var $table_t; $champ_t : Text
-var $nbColonne_el; $i_el; $nbBoucle_el : Integer
+var $nbColonne_el; $i_el; $nbBoucle_el; $refFenetre_el : Integer
 var $pointeur_p : Pointer
 var $class_o : Object
 var $collection_c; $data_c : Collection
@@ -14,14 +14,18 @@ Case of
 		$collection_c.unshift("Tous les champs")
 		
 		OBJECT Get pointer:C1124(Objet courant:K67:2)->:=New object:C1471("values"; $collection_c; "index"; -1; "currentValue"; "Sélectionnez un champ")
+		OBJECT SET ENABLED:C1123(*; "Popup Liste déroulante1"; False:C215)
 	: (Form event code:C388=Sur données modifiées:K2:15)
+		$refFenetre_el:=Frontmost window:C447
+		
 		$class_o:=crgpdToolGetClass("RGPDDisplay").new()
 		$class_o.getData(->$data_c)
 		
+		Form:C1466.data:=New collection:C1472
 		Form:C1466.data:=$data_c.copy()
 		
 		$nbColonne_el:=LISTBOX Get number of columns:C831(*; "List Box")
-		LISTBOX DELETE COLUMN:C830(*; "List Box"; $nbColonne_el; $nbColonne_el-1)
+		LISTBOX DELETE COLUMN:C830(*; "List Box"; 2; $nbColonne_el-1)
 		
 		$nbBoucle_el:=1
 		
@@ -43,4 +47,5 @@ Case of
 			OBJECT SET TITLE:C194(*; "Entête"+String:C10($i_el); $collection_c[$i_el-1])
 		End for 
 		
+		$class_o.resizeWindows($nbBoucle_el; $refFenetre_el)
 End case 

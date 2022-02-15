@@ -1,3 +1,10 @@
+/* -----------------------------------------------------------------------------
+Class : cs.RGPDDisplay
+
+Class de gestion du formulaire d'anonymisation
+
+-----------------------------------------------------------------------------*/
+
 Class constructor
 	
 Function getData($collectionToComplete_p : Pointer)
@@ -21,6 +28,7 @@ Function getData($collectionToComplete_p : Pointer)
 			If ($champ_t="Tous les champs") | ($champ_t=$propriete_t)
 				$collectionToComplete_p->[$collectionToComplete_p->length-1][$propriete_t]:=$enregistrement_o[$propriete_t]
 				$collectionToComplete_p->[$collectionToComplete_p->length-1].type:=Value type:C1509($enregistrement_o[$propriete_t])
+				$collectionToComplete_p->[$collectionToComplete_p->length-1].ID:=$enregistrement_o.getKey()
 			End if 
 			
 		End for each 

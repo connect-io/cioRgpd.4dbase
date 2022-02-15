@@ -13,6 +13,7 @@
 	"bottomMargin": 10,
 	"events": [
 		"onLoad",
+		"onOutsideCall",
 		"onDataChange"
 	],
 	"windowTitle": "Anonymisation des données",
@@ -163,7 +164,8 @@
 						"onClick"
 					],
 					"right": 598,
-					"sizingX": "grow"
+					"sizingX": "grow",
+					"method": "ObjectMethods/Bouton.4dm"
 				}
 			}
 		}

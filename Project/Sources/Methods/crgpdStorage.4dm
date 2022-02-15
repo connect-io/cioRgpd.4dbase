@@ -1,14 +1,12 @@
 //%attributes = {"shared":true}
 /* -----------------------------------------------------------------------------
-Méthode : crgpdStart
+Méthode : crgpdStorage
 
-Permet de faire l'instanciation de la class RGPD
+Utilisation du storage du composant dans la base hôte.
 
 Historique
 15/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
 -----------------------------------------------------------------------------*/
 var $0 : Object
-var $1 : Boolean
 
-// Instanciation de la class
-$0:=crgpdToolGetClass("RGPD").new($1)
+$0:=Storage:C1525

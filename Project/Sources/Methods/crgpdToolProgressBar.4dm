@@ -1,14 +1,12 @@
 //%attributes = {}
-// ----------------------------------------------------
-// Nom utilisateur (OS) : Rémy Scanu
-// Date et heure : 07/02/22, 16:48:49
-// ----------------------------------------------------
-// Méthode : crgpdToolProgressBar
-// Description
-// 
-//
-// Paramètres
-// ----------------------------------------------------
+/* -----------------------------------------------------------------------------
+Méthode : crgpdToolProgressBar
+
+Méthode qui permet de gérer une barre de progression
+
+Historique
+04/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
+-----------------------------------------------------------------------------*/
 C_REAL:C285($1)
 C_TEXT:C284($2)
 C_BOOLEAN:C305($3)

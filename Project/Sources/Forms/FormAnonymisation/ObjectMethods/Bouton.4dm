@@ -1,46 +1,53 @@
 var $champ_t : Text
-var $continue_b : Boolean
-var $element_o; $enregistrement_o : Object
+var $element_o; $enregistrement_o; $class_o; $type_o : Object
+var $collection_c; $typeData_c : Collection
 
-ASSERT:C1129(Storage:C1525.rgpd#Null:C1517; "La méthode crgpdStart doit être exécuter sur démarrage de la base")
+$collection_c:=New collection:C1472
 
-$continue_b:=(Storage:C1525.rgpd#Null:C1517)
-
-If ($continue_b=True:C214)
-	
-	If (Form:C1466.elementSelection.length>0)
-		CONFIRM:C162("Souhaitez-vous vraiment anonymiser "+Choose:C955(Form:C1466.elementSelection.length>1; "les "+String:C10(Form:C1466.elementSelection.length)+" enregistrements sélectionnés"; "l'enregistrement sélectionné")+" ?"; "Valider"; "Annuler")
+Case of 
+	: (Form event code:C388=Sur chargement:K2:1)
+		OBJECT SET ENABLED:C1123(*; OBJECT Get name:C1087(Objet courant:K67:2); False:C215)
+	: (Form event code:C388=Sur clic:K2:4)
 		
-		If (OK=1)
+		If (Form:C1466.elementSelection.length>0)
+			CONFIRM:C162("Souhaitez-vous vraiment anonymiser "+Choose:C955(Form:C1466.elementSelection.length>1; "les "+String:C10(Form:C1466.elementSelection.length)+" enregistrements sélectionnés"; "l'enregistrement sélectionné")+" ?"; "Valider"; "Annuler")
 			
-			If ($champ_t#"Tous les champs")
+			If (OK=1)
+				$champ_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue
 				
-			End if 
-			
-			crgpdToolProgressBar(0; "Initialisation"; True:C214)
-			
-			For each ($element_o; Form:C1466.elementSelection)
-				crgpdToolProgressBar((Form:C1466.elementSelection.indexOf($element_o)+1)/Form:C1466.elementSelection.length; "Anonymisation de votre sélection en cours..."; True:C214)
+				$class_o:=crgpdToolGetClass("RGPDDisplay").new()
+				$typeData_c:=$class_o.chooseTypeData()
 				
-				$enregistrement_o.get($element_o.ID)
+				crgpdToolProgressBar(0; "Initialisation"; True:C214)
 				
-				If ($enregistrement_o#Null:C1517)
-					$champ_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue
+				For each ($element_o; Form:C1466.elementSelection)
+					crgpdToolProgressBar((Form:C1466.elementSelection.indexOf($element_o)+1)/Form:C1466.elementSelection.length; "Anonymisation de votre sélection en cours..."; True:C214)
 					
-					If ($champ_t#"Tous les champs")
+					$enregistrement_o:=ds:C1482[$element_o.table].get($element_o.primaryKey)
+					
+					If ($enregistrement_o#Null:C1517)
+						
+						For each ($type_o; $typeData_c)
+							$collection_c:=$typeData_c.query("lib = :1"; $type_o.lib)
+							
+							If ($collection_c.length=1)
+								$class_o.applyValue($enregistrement_o; $element_o; $collection_c[0])
+							End if 
+							
+						End for each 
 						
 					End if 
 					
-				End if 
+				End for each 
 				
-			End for each 
+			End if 
 			
+			crgpdToolProgressBar(1; "arrêt")
+			
+			Form:C1466.changeChamp:=True:C214
+			POST OUTSIDE CALL:C329(Current process:C322)
+		Else 
+			ALERT:C41("Merci de sélectionner un/ou plusieurs enregistrements")
 		End if 
 		
-		crgpdToolProgressBar(1; "arrêt")
-		POST OUTSIDE CALL:C329(Current process:C322)
-	Else 
-		ALERT:C41("Merci de sélectionner un/ou plusieurs enregistrements")
-	End if 
-	
-End if 
+End case 

@@ -39,9 +39,9 @@
 					"type": "text",
 					"text": "Anonymisation des données",
 					"top": 5,
-					"left": 10,
-					"width": 590,
-					"height": 30,
+					"left": 0,
+					"width": 620,
+					"height": 29,
 					"fontSize": 24,
 					"stroke": "#FFFFFF",
 					"textAlign": "center",
@@ -161,6 +161,7 @@
 					"iconFrames": 4,
 					"style": "roundedBevel",
 					"events": [
+						"onLoad",
 						"onClick"
 					],
 					"right": 598,
@@ -170,7 +171,7 @@
 			}
 		}
 	],
-	"geometryStamp": 86,
+	"geometryStamp": 88,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

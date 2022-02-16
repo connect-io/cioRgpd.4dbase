@@ -27,7 +27,7 @@
 					"type": "button",
 					"text": "Valider",
 					"top": 105,
-					"left": 38,
+					"left": 138,
 					"width": 202,
 					"height": 30,
 					"events": [
@@ -39,7 +39,7 @@
 					"type": "dropdown",
 					"left": 14,
 					"top": 48,
-					"width": 251,
+					"width": 450,
 					"height": 20,
 					"events": [
 						"onLoad",
@@ -52,7 +52,7 @@
 					"type": "input",
 					"left": 14,
 					"top": 20,
-					"width": 251,
+					"width": 450,
 					"height": 17,
 					"dataSource": "Form:C1466.title",
 					"enterable": false,
@@ -62,7 +62,7 @@
 			}
 		}
 	],
-	"geometryStamp": 1,
+	"geometryStamp": 6,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

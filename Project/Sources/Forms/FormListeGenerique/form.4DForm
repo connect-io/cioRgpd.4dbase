@@ -14,7 +14,7 @@
 	"events": [
 		"onLoad"
 	],
-	"windowTitle": "window title",
+	"windowTitle": "Liste",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -45,7 +45,8 @@
 					"verticalAlign": "middle",
 					"borderStyle": "none",
 					"events": [
-						"onClick"
+						"onClick",
+						"onDataChange"
 					],
 					"showFooters": false,
 					"fill": "automatic",
@@ -75,7 +76,8 @@
 								"timeFormat": "hh_mm_ss",
 								"verticalAlign": "middle"
 							},
-							"alternateFill": "automaticAlternate"
+							"alternateFill": "#F4F5F5",
+							"enterable": false
 						}
 					]
 				}

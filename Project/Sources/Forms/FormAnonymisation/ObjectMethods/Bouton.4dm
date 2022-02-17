@@ -22,18 +22,12 @@ Case of
 				
 				For each ($element_o; Form:C1466.elementSelection)
 					crgpdToolProgressBar((Form:C1466.elementSelection.indexOf($element_o)+1)/Form:C1466.elementSelection.length; "Anonymisation de votre sélection en cours..."; True:C214)
-					
 					$enregistrement_o:=ds:C1482[$element_o.table].get($element_o.primaryKey)
 					
 					If ($enregistrement_o#Null:C1517)
 						
 						For each ($type_o; $typeData_c)
-							$collection_c:=$typeData_c.query("lib = :1"; $type_o.lib)
-							
-							If ($collection_c.length=1)
-								$class_o.applyValue($enregistrement_o; $element_o; $collection_c[0])
-							End if 
-							
+							$class_o.applyValue($enregistrement_o; $element_o; $type_o)
 						End for each 
 						
 					End if 

@@ -9,24 +9,24 @@ Class constructor
 	
 Function applyValue($enregistrement_o : Object; $element_o : Object; $type_o : Object)
 	
-	If ($element_o.champType="")
-		$element_o.champType:=Value type:C1509($enregistrement_o[$element_o.champ])
+	If ($element_o.champ="Tous les champs")
+		$enregistrement_o[$type_o.lib]:=This:C1470.generateValue($type_o; Value type:C1509($enregistrement_o[$type_o.lib]); $enregistrement_o[$type_o.lib])
+	Else 
+		$enregistrement_o[$element_o.champ]:=This:C1470.generateValue($type_o; $element_o.champType; $enregistrement_o[$element_o.champ])
 	End if 
 	
-	$enregistrement_o[$element_o.champ]:=This:C1470.generateValue($type_o; $element_o.champType; $enregistrement_o[$element_o.champ])
 	$enregistrement_o.save()
 	
 Function chooseTypeData()->$typeData_c : Collection
-	var $champ_t; $element_t : Text
-	var $element_o; $configuration_o; $base_o : Object
+	var $champ_t; $element_t; $type_t : Text
+	var $element_o; $configuration_o; $base_o; $autreElement_o : Object
 	var $collection_c; $column_c; $data_c : Collection
 	
 	ASSERT:C1129(Storage:C1525.rgpd#Null:C1517; "La méthode crgpdStart doit être exécuter sur démarrage de la base")
 	
 	$base_o:=New object:C1471
 	
-	$data_c:=New collection:C1472
-	$column_c:=New collection:C1472
+	crgpdToolNewCollection(->$data_c; ->$column_c; ->$typeData_c; ->$collection_c)
 	
 	$champ_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue
 	
@@ -52,8 +52,8 @@ Fin de si
 Pour chaque ($element_o; $typeData_c)
 	
 Repeter 
-	crgpdToolWindowsForm("FormSelectValue"; "center"; Créer objet("collection"; $collection_c; \
-		"property"; "lib"; "selectSubTitle"; "Merci de sélectionner le type de donnée du champ «"+$element_o.lib+"»"; "title"; "Choix du type de donnée du champ «"+$element_o.lib+"» :"))
+		crgpdToolWindowsForm("FormSelectValue"; "center"; Créer objet("collection"; $collection_c; \
+				"property"; "lib"; "selectSubTitle"; "Merci de sélectionner le type de donnée du champ «"+$element_o.lib+"»"; "title"; "Choix du type de donnée du champ «"+$element_o.lib+"» :"))
 	
 $element_o.type:=selectValue_t
 	
@@ -91,29 +91,48 @@ Fin de chaque */
 	
 	$configuration_o:=New object:C1471(\
 		"column"; $column_c; \
-		"data"; $data_c)
+		"data"; $data_c; "columnRules"; New object:C1471("booleanUniqueByLine"; True:C214; "clic"; "noCopyCollection"))
 	
 	crgpdToolWindowsForm("FormListeGenerique"; "center"; $configuration_o)
 	
-	If (elementSelection_c.length>0)
+	For each ($element_o; $data_c)
+		$collection_c:=OB Entries:C1720($element_o)
 		
-	End if 
+		For each ($autreElement_o; $collection_c) Until (Bool:C1537($autreElement_o.value)=True:C214)
+			
+			If (Value type:C1509($autreElement_o.value)=Est un booléen:K8:9)
+				
+				If ($autreElement_o.value=True:C214)
+					$type_t:=$autreElement_o.key
+				End if 
+				
+			End if 
+			
+		End for each 
+		
+		If ($type_t="")
+			$type_t:="Type par défaut du champ"
+		End if 
+		
+		$typeData_c.push(New object:C1471("lib"; $element_o.lib; "type"; $type_t))
+		CLEAR VARIABLE:C89($type_t)
+	End for each 
 	
 Function generateValue($type_o : Object; $typeDefaut_v : Variant; $valueDefaut_v : Variant)->$value_v : Variant
 	var $random_el; $nbJour_el : Integer
 	var $collection_c : Collection
 	
-	$collection_c:=Storage:C1525.rgpd.champ.query("lib = :1"; $type_o.lib)
+	$collection_c:=Storage:C1525.rgpd.champ.query("libInCollection = :1"; $type_o.type)
 	
 	If ($collection_c.length=1)
 		
-		If ($type_o.lib="Date de naissance")
+		If ($type_o.type="dateNaissance")
 			$nbJour_el:=crgpdToolGetNbJour(Date:C102($collection_c[0].value.debut); Date:C102($collection_c[0].value.fin))
 			$random_el:=(Random:C100%($nbJour_el-0+1))+0
 			
 			$value_v:=Add to date:C393(Date:C102($collection_c[0].value.debut); 0; 0; $random_el)
 		Else 
-			$random_el:=(Random:C100%($collection_c[0].value.length-0+1))+0
+			$random_el:=(Random:C100%($collection_c[0].value.length-1-0+1))+0
 			$value_v:=$collection_c[0].value[$random_el]
 		End if 
 		
@@ -122,9 +141,8 @@ Function generateValue($type_o : Object; $typeDefaut_v : Variant; $valueDefaut_v
 		// toDo
 		Case of 
 			: ($typeDefaut_v=Est un texte:K8:3)
-				
 			: ($typeDefaut_v=Est un entier long:K8:6)
-				
+			: ($typeDefaut_v=Est un numérique:K8:4)
 			: ($typeDefaut_v=Est une date:K8:7)
 				
 		End case 

@@ -8,7 +8,19 @@ Class de gestion du formulaire d'anonymisation
 Class constructor
 	
 Function applyValue($enregistrement_o : Object; $element_o : Object; $type_o : Object)
+/* -----------------------------------------------------------------------------
+Fonction : RGPDDisplay.applyValue
 	
+Applique une valeur aléatoire pour anonymiser un champ d'une table
+	
+Paramètre
+$enregistrement_o -> Entité à anonymiser
+$element_o -> Objet créer dans la function getData (avec les propriétés table, champ, champType, primaryKey)
+$type_o -> Type de valeur attendue (nom, prénom, adresse etc.)
+	
+Historique
+17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
+-----------------------------------------------------------------------------*/
 	If ($element_o.champ="Tous les champs")
 		$enregistrement_o[$type_o.lib]:=This:C1470.generateValue($type_o; Value type:C1509($enregistrement_o[$type_o.lib]); $enregistrement_o[$type_o.lib])
 	Else 
@@ -18,6 +30,17 @@ Function applyValue($enregistrement_o : Object; $element_o : Object; $type_o : O
 	$enregistrement_o.save()
 	
 Function chooseTypeData()->$typeData_c : Collection
+/* -----------------------------------------------------------------------------
+Fonction : RGPDDisplay.chooseTypeData
+	
+Permet de faire matcher un champ avec un type de valeur attendue (nom, prénom etc.)
+	
+Paramètre
+$typeData_c <- Collection qui contient pour chaque champ le type de donnée attendu
+	
+Historique
+17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
+-----------------------------------------------------------------------------*/
 	var $champ_t; $element_t; $type_t : Text
 	var $element_o; $configuration_o; $base_o; $autreElement_o : Object
 	var $collection_c; $column_c; $data_c : Collection
@@ -52,8 +75,8 @@ Fin de si
 Pour chaque ($element_o; $typeData_c)
 	
 Repeter 
-		crgpdToolWindowsForm("FormSelectValue"; "center"; Créer objet("collection"; $collection_c; \
-				"property"; "lib"; "selectSubTitle"; "Merci de sélectionner le type de donnée du champ «"+$element_o.lib+"»"; "title"; "Choix du type de donnée du champ «"+$element_o.lib+"» :"))
+			crgpdToolWindowsForm("FormSelectValue"; "center"; Créer objet("collection"; $collection_c; \
+						"property"; "lib"; "selectSubTitle"; "Merci de sélectionner le type de donnée du champ «"+$element_o.lib+"»"; "title"; "Choix du type de donnée du champ «"+$element_o.lib+"» :"))
 	
 $element_o.type:=selectValue_t
 	
@@ -119,6 +142,19 @@ Fin de chaque */
 	End for each 
 	
 Function generateValue($type_o : Object; $typeDefaut_v : Variant; $valueDefaut_v : Variant)->$value_v : Variant
+/* -----------------------------------------------------------------------------
+Fonction : RGPDDisplay.generateValue
+	
+Générer une valeur pour anonymiser un champ d'une table
+	
+Paramètre
+$type_o -> Type de valeur attendue (nom, prénom, adresse etc.)
+$valueDefaut_v -> Valeur par défaut du champ à anonymiser
+$value_v <- Valeur du champ une fois anonymiser
+	
+Historique
+17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
+-----------------------------------------------------------------------------*/
 	var $random_el; $nbJour_el : Integer
 	var $collection_c : Collection
 	
@@ -151,6 +187,18 @@ Function generateValue($type_o : Object; $typeDefaut_v : Variant; $valueDefaut_v
 	End if 
 	
 Function getData($collectionToComplete_p : Pointer)
+/* -----------------------------------------------------------------------------
+Fonction : RGPDDisplay.getData
+	
+Obtenir les valeurs du/des champs d'une table pour les anonymiser
+	
+Paramètre
+	$collectionToComplete_p <-> Pointeur de la collection qui contient tous \
+		les enregistrements par rapport au(x) champ(s) et à la table recherchée
+	
+Historique
+17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
+-----------------------------------------------------------------------------*/
 	var $table_t; $champ_t : Text
 	var $table_o : Object
 	
@@ -183,6 +231,20 @@ Function getData($collectionToComplete_p : Pointer)
 	crgpdToolProgressBar(1; "arrêt")
 	
 Function resizeFullWidth($fullWidth_b; $objet_c : Collection)
+/* -----------------------------------------------------------------------------
+Fonction : RGPDDisplay.resizeFullWidth
+	
+	Permet de resizer par programmation un ojet pour l'adapter au plein écran ou \
+		à la taille d'origine de la fenêtre
+	
+Paramètre
+	$fullWidth_b -> Booléen qui indique si on est dans le cas d'une resize \
+		d'un objet pour le plein écran
+$objet_c -> Collection qui contient tous les noms d'objet à appliquer la resize
+	
+Historique
+17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
+-----------------------------------------------------------------------------*/
 	var $objet_t : Text
 	var $gauche_el; $haut_el; $droite_el; $bas_el : Integer
 	var $pointeur_p : Pointer
@@ -214,6 +276,18 @@ Function resizeFullWidth($fullWidth_b; $objet_c : Collection)
 	End for each 
 	
 Function resizeWindows($nbColonne_el : Integer; $refFenetre_el : Integer)
+/* -----------------------------------------------------------------------------
+Fonction : RGPDDisplay.resizeWindows
+	
+Permet de resizer par programmation la fenêtre qui affiche les éléments à anonymiser
+	
+Paramètre
+$nbColonne_el -> Nombre de colonne que la listbox doit contenir
+$refFenetre_el -> Référence de la fenêtre où est située la listbox
+	
+Historique
+17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
+-----------------------------------------------------------------------------*/
 	var $gauche_el; $haut_el; $bas_el; $droite_el; $moitie_el; $largeur_el; $largeurForm_el; $hauteurForm_el; $gaucheCalcul_el; $droiteCalcul_el : Integer
 	
 	$largeur_el:=Screen width:C187(*)

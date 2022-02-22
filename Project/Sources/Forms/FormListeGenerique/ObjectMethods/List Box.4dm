@@ -34,8 +34,13 @@ Case of
 		
 		If (Form:C1466.columnRules#Null:C1517)
 			
-			If (Form:C1466.columnRules.clic#Null:C1517)
-				$stop_b:=(Form:C1466.columnRules.clic="noCopyCollection")
+			If (Form:C1466.columnRules.event#Null:C1517)
+				$collection_c:=Form:C1466.columnRules.event.query("name = :1"; "clic")
+				
+				If ($collection_c.length=1)
+					$stop_b:=($collection_c[0].action="noCopyCollection")
+				End if 
+				
 			End if 
 			
 		End if 

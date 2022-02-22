@@ -24,16 +24,17 @@
 		},
 		{
 			"objects": {
-				"Rectangle3": {
-					"type": "rectangle",
-					"top": 0,
+				"Zone de saisie": {
+					"type": "input",
 					"left": 0,
+					"top": 0,
 					"width": 620,
 					"height": 40,
-					"sizingX": "grow",
-					"stroke": "transparent",
-					"class": "",
-					"fill": "#424242"
+					"enterable": false,
+					"focusable": false,
+					"contextMenu": "none",
+					"fill": "#424242",
+					"borderStyle": "none"
 				},
 				"Texte": {
 					"type": "text",
@@ -167,11 +168,25 @@
 					"right": 598,
 					"sizingX": "grow",
 					"method": "ObjectMethods/Bouton.4dm"
+				},
+				"Case à cocher": {
+					"type": "checkbox",
+					"text": "Utiliser les paramètres sauvegardés",
+					"top": 202,
+					"left": 10,
+					"width": 220,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"fontSize": 10,
+					"dataSource": "Form:C1466.useParamSave"
 				}
 			}
 		}
 	],
-	"geometryStamp": 88,
+	"geometryStamp": 111,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

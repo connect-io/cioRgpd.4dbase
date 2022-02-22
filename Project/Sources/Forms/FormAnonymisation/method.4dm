@@ -53,15 +53,16 @@ Case of
 					LISTBOX INSERT COLUMN FORMULA:C970(*; "List Box"; $i_el+1; "Colonne"+String:C10($i_el); "This."+$collection_c[$i_el-1]; Est un texte:K8:3; "Entête"+String:C10($i_el); $pointeur_p)
 				End if 
 				
-				If ($collection_c[$i_el-1]="table") | ($collection_c[$i_el-1]="champ") | ($collection_c[$i_el-1]="champType") | ($collection_c[$i_el-1]="primaryKey")
+				If ($collection_c[$i_el-1]="table") | ($collection_c[$i_el-1]="champ") | ($collection_c[$i_el-1]="champType") | ($collection_c[$i_el-1]="primaryKey")  // Si on est sur une colonne rajouter manuellement [table, champ, type], on masque celle-ci
 					OBJECT SET VISIBLE:C603(*; "Colonne"+String:C10($i_el); False:C215)
 				End if 
 				
 				OBJECT SET TITLE:C194(*; "Entête"+String:C10($i_el); $collection_c[$i_el-1])
 			End for 
 			
-			$class_o.resizeWindows($nbBoucle_el; $refFenetre_el)
-			$class_o.resizeFullWidth(($nbBoucle_el>1); New collection:C1472("Rectangle3"; "Bouton"))
+			$class_o.resizeWindows($nbBoucle_el; $refFenetre_el)  // On redimensionne la fenêtre du formulaire
+			$class_o.resizeFullWidth(($nbBoucle_el>1); New collection:C1472("Zone de saisie"; "Bouton"))  // On redimensionne la listBox par rapport à la taille de la fenêtre modifiée juste avant
+			$class_o.centerElementInWindows(New collection:C1472("Texte"); $refFenetre_el)  // On centre les objets par rapport à la taille de la fenêter modifiée juste avant
 			
 			OBJECT SET ENABLED:C1123(*; "Bouton"; True:C214)
 		End if 

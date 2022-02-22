@@ -29,6 +29,35 @@ Historique
 	
 	$enregistrement_o.save()
 	
+Function centerElementInWindows($objet_c : Collection; $refFenetre_el : Integer)
+/* -----------------------------------------------------------------------------
+Fonction : RGPDDisplay.centerElementInWindows
+	
+Permet de centrer par programmation des objets par rapport à la taille de la fenêtre
+	
+Paramètre
+$objet_c -> Collection qui contient tous les noms d'objet à appliquer la resize
+$refFenetre_el -> Référence de la fenêtre où est située la listbox
+	
+Historique
+21/02/22 - Rémy Scanu remy@connect-io.fr> - Création
+-----------------------------------------------------------------------------*/
+	var $objet_t : Text
+	var $gauche_el; $haut_el; $droite_el; $bas_el; $gaucheObjet_el; $hautObjet_el; $droiteObjet_el; $basObjet_el; $largeur_el; $largeurObjet_el : Integer
+	
+	GET WINDOW RECT:C443($gauche_el; $haut_el; $droite_el; $bas_el; $refFenetre_el)
+	$largeur_el:=$droite_el-$gauche_el
+	
+	For each ($objet_t; $objet_c)
+		OBJECT GET COORDINATES:C663(*; $objet_t; $gaucheObjet_el; $hautObjet_el; $droiteObjet_el; $basObjet_el)
+		$largeurObjet_el:=$droiteObjet_el-$gaucheObjet_el
+		
+		If ($largeurObjet_el<=$largeur_el)
+			OBJECT SET COORDINATES:C1248(*; $objet_t; ($largeur_el-$largeurObjet_el)/2; $hautObjet_el)
+		End if 
+		
+	End for each 
+	
 Function chooseTypeData()->$typeData_c : Collection
 /* -----------------------------------------------------------------------------
 Fonction : RGPDDisplay.chooseTypeData
@@ -75,8 +104,8 @@ Fin de si
 Pour chaque ($element_o; $typeData_c)
 	
 Repeter 
-			crgpdToolWindowsForm("FormSelectValue"; "center"; Créer objet("collection"; $collection_c; \
-						"property"; "lib"; "selectSubTitle"; "Merci de sélectionner le type de donnée du champ «"+$element_o.lib+"»"; "title"; "Choix du type de donnée du champ «"+$element_o.lib+"» :"))
+					crgpdToolWindowsForm("FormSelectValue"; "center"; Créer objet("collection"; $collection_c; \
+										"property"; "lib"; "selectSubTitle"; "Merci de sélectionner le type de donnée du champ «"+$element_o.lib+"»"; "title"; "Choix du type de donnée du champ «"+$element_o.lib+"» :"))
 	
 $element_o.type:=selectValue_t
 	
@@ -90,6 +119,14 @@ Fin de chaque */
 	
 	$column_c:=Storage:C1525.rgpd.champ.extract("lib"; "titre")
 	$column_c.unshift(New object:C1471("titre"; "Nom du champ"))
+	
+	For each ($colonne_o; $column_c)
+		
+		If ($column_c.indexOf($colonne_o)>0)
+			$colonne_o["text-align"]:=3  // Centre
+		End if 
+		
+	End for each 
 	
 	For ($i_el; 0; Storage:C1525.rgpd.champ.length-1)
 		$base_o[Storage:C1525.rgpd.champ[$i_el].libInCollection]:=False:C215
@@ -114,7 +151,12 @@ Fin de chaque */
 	
 	$configuration_o:=New object:C1471(\
 		"column"; $column_c; \
-		"data"; $data_c; "columnRules"; New object:C1471("booleanUniqueByLine"; True:C214; "clic"; "noCopyCollection"))
+		"data"; $data_c; "columnStyle"; New object:C1471(); \
+		"columnRules"; New object:C1471(\
+		"booleanUniqueByLine"; True:C214; \
+		"event"; New collection:C1472(New object:C1471(\
+		"name"; "clic"; \
+		"action"; "noCopyCollection"))))
 	
 	crgpdToolWindowsForm("FormListeGenerique"; "center"; $configuration_o)
 	
@@ -193,8 +235,8 @@ Fonction : RGPDDisplay.getData
 Obtenir les valeurs du/des champs d'une table pour les anonymiser
 	
 Paramètre
-	$collectionToComplete_p <-> Pointeur de la collection qui contient tous \
-		les enregistrements par rapport au(x) champ(s) et à la table recherchée
+			$collectionToComplete_p <-> Pointeur de la collection qui contient tous \
+						les enregistrements par rapport au(x) champ(s) et à la table recherchée
 	
 Historique
 17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
@@ -234,12 +276,12 @@ Function resizeFullWidth($fullWidth_b; $objet_c : Collection)
 /* -----------------------------------------------------------------------------
 Fonction : RGPDDisplay.resizeFullWidth
 	
-	Permet de resizer par programmation un ojet pour l'adapter au plein écran ou \
-		à la taille d'origine de la fenêtre
+			Permet de resizer par programmation un ojet pour l'adapter au plein écran ou \
+						à la taille d'origine de la fenêtre
 	
 Paramètre
-	$fullWidth_b -> Booléen qui indique si on est dans le cas d'une resize \
-		d'un objet pour le plein écran
+			$fullWidth_b -> Booléen qui indique si on est dans le cas d'une resize \
+						d'un objet pour le plein écran
 $objet_c -> Collection qui contient tous les noms d'objet à appliquer la resize
 	
 Historique
@@ -256,14 +298,14 @@ Historique
 			OBJECT GET COORDINATES:C663(*; $objet_t; $gauche_el; $haut_el; $droite_el; $bas_el)
 			
 			Case of 
-				: ($fullWidth_b=True:C214)
+				: ($fullWidth_b=True:C214)  // Plein écran
 					
-					If (Form:C1466.objet[$objet_t]=Null:C1517)
+					If (Form:C1466.objet[$objet_t]=Null:C1517)  // On stocke si on ne la pas déjà fait les coordonnées par défaut de l'objet
 						Form:C1466.objet[$objet_t]:=New object:C1471("gauche"; $gauche_el; "haut"; $haut_el; "droite"; $droite_el; "bas"; $bas_el)
 					End if 
 					
 					$droite_el:=Screen width:C187(*)
-				: (Form:C1466.objet[$objet_t]#Null:C1517)
+				: (Form:C1466.objet[$objet_t]#Null:C1517)  // On restitue les valeurs par défaut des coordonnées de l'objet
 					$gauche_el:=Form:C1466.objet[$objet_t].gauche
 					$haut_el:=Form:C1466.objet[$objet_t].haut
 					$droite_el:=Form:C1466.objet[$objet_t].droite
@@ -293,7 +335,9 @@ Historique
 	$largeur_el:=Screen width:C187(*)
 	
 	$droiteCalcul_el:=610+(150*($nbColonne_el-1))
-	OBJECT SET COORDINATES:C1248(*; "List Box"; 240; 60; Choose:C955($droiteCalcul_el<=$largeur_el; $droiteCalcul_el; $largeur_el-20))
+	
+	OBJECT GET COORDINATES:C663(*; "List box"; $gauche_el; $haut_el; $droite_el; $bas_el)
+	OBJECT SET COORDINATES:C1248(*; "List Box"; $gauche_el; $haut_el; Choose:C955($droiteCalcul_el<=$largeur_el; $droiteCalcul_el; $largeur_el-20))
 	
 	GET WINDOW RECT:C443($gauche_el; $haut_el; $droite_el; $bas_el; $refFenetre_el)
 	FORM GET PROPERTIES:C674("FormAnonymisation"; $largeurForm_el; $hauteurForm_el)

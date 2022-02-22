@@ -22,6 +22,10 @@ Case of
 				LISTBOX INSERT COLUMN FORMULA:C970(*; "List Box"; $i_el+1; "Colonne"+String:C10($i_el); "This."+$collection_c[$i_el-1]; Value type:C1509(Form:C1466.data[0][$collection_c[$i_el-1]]); "Entête"+String:C10($i_el); $pointeur_p)
 			End if 
 			
+			If (Form:C1466.column[$i_el-1]["text-align"]#Null:C1517)
+				OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "Colonne"+String:C10($i_el); Form:C1466.column[$i_el-1]["text-align"])
+			End if 
+			
 			OBJECT SET TITLE:C194(*; "Entête"+String:C10($i_el); Form:C1466.column[$i_el-1].titre)
 		End for 
 		

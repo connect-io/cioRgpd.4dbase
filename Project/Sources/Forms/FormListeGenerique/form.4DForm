@@ -24,7 +24,7 @@
 			"objects": {
 				"List Box": {
 					"type": "listbox",
-					"top": 20,
+					"top": 120,
 					"left": 20,
 					"width": 300,
 					"height": 400,
@@ -80,11 +80,40 @@
 							"enterable": false
 						}
 					]
+				},
+				"Zone de saisie1": {
+					"type": "input",
+					"left": 20,
+					"top": 60,
+					"width": 300,
+					"height": 40,
+					"fontFamily": "Arial",
+					"fontSize": 12,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"bottom": 100,
+					"fontWeight": "bold",
+					"dataSource": "Form:C1466.subTitle"
+				},
+				"Zone de saisie": {
+					"type": "input",
+					"left": 20,
+					"top": 20,
+					"width": 300,
+					"height": 25,
+					"fontFamily": "Arial",
+					"fontSize": 18,
+					"borderStyle": "none",
+					"fill": "transparent",
+					"bottom": 45,
+					"fontWeight": "bold",
+					"textDecoration": "underline",
+					"dataSource": "Form:C1466.title"
 				}
 			}
 		}
 	],
-	"geometryStamp": 9,
+	"geometryStamp": 91,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

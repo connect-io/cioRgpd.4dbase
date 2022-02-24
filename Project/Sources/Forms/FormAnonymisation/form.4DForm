@@ -181,7 +181,8 @@
 					],
 					"dataSourceTypeHint": "boolean",
 					"fontSize": 10,
-					"dataSource": "Form:C1466.useParamSave"
+					"dataSource": "Form:C1466.useParamSave",
+					"method": "ObjectMethods/Case à cocher.4dm"
 				}
 			}
 		}

@@ -17,6 +17,7 @@ Case of
 			$collection_c.unshift("Tous les champs")
 			
 			Form:C1466.data:=New collection:C1472
+			Form:C1466.useParamSave:=False:C215
 			
 			OBJECT SET ENABLED:C1123(*; "Bouton"; False:C215)
 			OBJECT SET ENABLED:C1123(*; "Popup Liste déroulante1"; True:C214)
@@ -32,6 +33,8 @@ Case of
 			
 			Form:C1466.data:=New collection:C1472
 			Form:C1466.data:=$data_c.copy()
+			
+			Form:C1466.useParamSave:=False:C215
 			
 			$nbColonne_el:=LISTBOX Get number of columns:C831(*; "List Box")
 			LISTBOX DELETE COLUMN:C830(*; "List Box"; 2; $nbColonne_el-1)

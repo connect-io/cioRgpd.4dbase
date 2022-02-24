@@ -29,6 +29,22 @@ Case of
 			OBJECT SET TITLE:C194(*; "Entête"+String:C10($i_el); Form:C1466.column[$i_el-1].titre)
 		End for 
 		
+		OBJECT GET COORDINATES:C663(*; "List Box"; $gauche_el; $haut_el; $droite_el; $bas_el)
+		
+		Case of 
+			: (Form:C1466.title=Null:C1517) & (Form:C1466.subTitle=Null:C1517)
+				crgpdToolMoveObject(0; New collection:C1472("Zone de saisie"; "Zone de saisie1"))
+			: (Form:C1466.title=Null:C1517)
+				crgpdToolMoveObject(0; New collection:C1472("Zone de saisie"))
+				
+				OBJECT SET COORDINATES:C1248(*; "Zone de saisie1"; $gauche_el; 20)
+				OBJECT SET COORDINATES:C1248(*; "List Box"; $gauche_el; 60)
+			: (Form:C1466.subTitle=Null:C1517)
+				crgpdToolMoveObject(0; New collection:C1472("Zone de saisie1"))
+				
+				OBJECT SET COORDINATES:C1248(*; "List Box"; $gauche_el; 60)
+		End case 
+		
 		GET WINDOW RECT:C443($gauche_el; $haut_el; $droite_el; $bas_el; Frontmost window:C447)
 		FORM GET PROPERTIES:C674("FormListeGenerique"; $largeurForm_el; $hauteurForm_el)
 		
@@ -37,11 +53,20 @@ Case of
 		
 		If ($gaucheCalcul_el<0)  // La Fenêtre va être plus large que la largeur de l'écran...
 			$gaucheCalcul_el:=20
-			$droiteCalcul_el:=Screen width:C187(*)-20
+			$droiteCalcul_el:=Screen width:C187(*)-60
 		Else 
 			$droiteCalcul_el:=((Screen width:C187(*)/2)-10)+($largeurForm_el/2)
 		End if 
 		
 		SET WINDOW RECT:C444($gaucheCalcul_el; $haut_el; $droiteCalcul_el; $bas_el; Frontmost window:C447; *)
-		OBJECT SET COORDINATES:C1248(*; "List Box"; $gaucheCalcul_el; 20; $droiteCalcul_el)
+		
+		If (Form:C1466.title#Null:C1517)
+			OBJECT SET COORDINATES:C1248(*; "Zone de saisie"; $gaucheCalcul_el; 20; $droiteCalcul_el)
+		End if 
+		
+		If (Form:C1466.subTitle#Null:C1517)
+			OBJECT SET COORDINATES:C1248(*; "Zone de saisie1"; $gaucheCalcul_el; 60; $droiteCalcul_el)
+		End if 
+		
+		OBJECT SET COORDINATES:C1248(*; "List Box"; $gaucheCalcul_el; Choose:C955(Form:C1466.subTitle#Null:C1517; 120; 20); $droiteCalcul_el)
 End case 

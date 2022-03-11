@@ -1,14 +1,14 @@
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Class : cs.RGPDDisplay
 
 Class de gestion du formulaire d'anonymisation
 
------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
 
 Class constructor
 	
 Function applyValue($enregistrement_o : Object; $element_o : Object; $type_o : Object)
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.applyValue
 	
 Applique une valeur aléatoire pour anonymiser un champ d'une table
@@ -19,8 +19,8 @@ $element_o -> Objet créer dans la function getData (avec les propriétés table
 $type_o -> Type de valeur attendue (nom, prénom, adresse etc.)
 	
 Historique
-17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
 	If ($element_o.champ="Tous les champs")
 		$enregistrement_o[$type_o.lib]:=This:C1470.generateValue($type_o; Value type:C1509($enregistrement_o[$type_o.lib]); $enregistrement_o[$type_o.lib])
 	Else 
@@ -30,7 +30,7 @@ Historique
 	$enregistrement_o.save()
 	
 Function centerElementInWindows($objet_c : Collection; $refFenetre_el : Integer)
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.centerElementInWindows
 	
 Permet de centrer par programmation des objets par rapport à la taille de la fenêtre
@@ -40,8 +40,8 @@ $objet_c -> Collection qui contient tous les noms d'objet à appliquer la resize
 $refFenetre_el -> Référence de la fenêtre où est située la listbox
 	
 Historique
-21/02/22 - Rémy Scanu remy@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+21/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
 	var $objet_t : Text
 	var $gauche_el; $haut_el; $droite_el; $bas_el; $gaucheObjet_el; $hautObjet_el; $droiteObjet_el; $basObjet_el; $largeur_el; $largeurObjet_el : Integer
 	
@@ -59,7 +59,7 @@ Historique
 	End for each 
 	
 Function chooseTypeData()->$typeData_c : Collection
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.chooseTypeData
 	
 Permet de faire matcher un champ avec un type de valeur attendue (nom, prénom etc.)
@@ -68,8 +68,8 @@ Paramètre
 $typeData_c <- Collection qui contient pour chaque champ le type de donnée attendu
 	
 Historique
-17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
 	var $champ_t; $element_t; $type_t : Text
 	var $remplacer_b : Boolean
 	var $element_o; $configuration_o; $base_o; $autreElement_o; $fichier_o; $content_o : Object
@@ -82,64 +82,31 @@ Historique
 	
 	crgpdToolNewCollection(->$data_c; ->$column_c; ->$typeData_c; ->$collection_c)
 	
-	If (Bool:C1537(Form:C1466.useParamSave)=True:C214)
-		$content_o:=JSON Parse:C1218($fichier_o.getText())
+	$champ_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue
+	
+	// Création des colonnes
+	$column_c:=Storage:C1525.rgpd.champ.extract("lib"; "titre")
+	$column_c.unshift(New object:C1471("titre"; "Nom du champ"))
+	
+	For each ($colonne_o; $column_c)
 		
-		$data_c:=$content_o.detail.query("table = :1 AND champ = :2"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue)[0].data
-	Else 
-		$champ_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue
+		If ($column_c.indexOf($colonne_o)>0)
+			$colonne_o["text-align"]:=3  // Centre
+		End if 
 		
-/*$collection_c:=Storage.rgpd.champ.extract("lib"; "lib")
-$collection_c.unshift(Créer objet("lib"; "Type par défaut du champ"))
-		
-$typeData_c:=Créer collection
-		
-Si ($champ_t="Tous les champs")
-		
-Pour chaque ($element_t; OBJET Lire pointeur(Objet nommé; "Popup Liste déroulante1")->values)
-		
-Si ($element_t#"Tous les champs")
-$typeData_c.push(Créer objet("lib"; $element_t; "type"; ""))
-Fin de si 
-		
-Fin de chaque 
-		
-Sinon 
-$typeData_c.push(Créer objet("lib"; $champ_t; "type"; ""))
-Fin de si 
-		
-Pour chaque ($element_o; $typeData_c)
-		
-Repeter 
-		crgpdToolWindowsForm("FormSelectValue"; "center"; Créer objet("collection"; $collection_c; \
-			"property"; "lib"; "selectSubTitle"; "Merci de sélectionner le type de donnée du champ «"+$element_o.lib+"»"; "title"; "Choix du type de donnée du champ «"+$element_o.lib+"» :"))
-		
-$element_o.type:=selectValue_t
-		
-Si (selectValue_t="")
-ALERTE("Merci de sélectionner un type de donnée")
-Fin de si 
-		
-Jusque (selectValue_t#"")
-		
-Fin de chaque */
-		
-		$column_c:=Storage:C1525.rgpd.champ.extract("lib"; "titre")
-		$column_c.unshift(New object:C1471("titre"; "Nom du champ"))
-		
-		For each ($colonne_o; $column_c)
+	End for each 
+	
+	For ($i_el; 0; Storage:C1525.rgpd.champ.length-1)
+		$base_o[Storage:C1525.rgpd.champ[$i_el].libInCollection]:=False:C215
+	End for 
+	
+	// Création des data
+	Case of 
+		: (Bool:C1537(Form:C1466.useParamSave)=True:C214)
+			$content_o:=JSON Parse:C1218($fichier_o.getText())
 			
-			If ($column_c.indexOf($colonne_o)>0)
-				$colonne_o["text-align"]:=3  // Centre
-			End if 
-			
-		End for each 
-		
-		For ($i_el; 0; Storage:C1525.rgpd.champ.length-1)
-			$base_o[Storage:C1525.rgpd.champ[$i_el].libInCollection]:=False:C215
-		End for 
-		
-		If ($champ_t="Tous les champs")
+			$data_c:=$content_o.detail.query("table = :1 AND champ = :2"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue)[0].data
+		: ($champ_t="Tous les champs")
 			
 			For each ($element_t; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->values)
 				$element_o:=cwToolObjectMerge(New object:C1471("lib"; $element_t); $base_o)
@@ -154,24 +121,23 @@ Fin de chaque */
 			$element_o:=cwToolObjectMerge(New object:C1471("lib"; $champ_t); $base_o)
 			
 			$data_c.push(OB Copy:C1225($element_o))
-		End if 
-		
-		$configuration_o:=New object:C1471(\
-			"column"; $column_c; \
-			"data"; $data_c; \
-			"title"; "Information :"; \
-			"subTitle"; "Dans cette fenêtre vous pourrez affecter pour chaque champ un type de champ (si vous avez sélectionné « Tous les champs » dans la fenêtre précédente tous les champs apparaissent et si vous n'avez sélectionné qu'un seul "+\
-			"champ uniquement celui-ci apparaît).\rCe type de champ fait référence au type de champ indiqué dans le fichier de config du composant (Dossier Resources/cioRgpd/config.json) et plus précisement à la propriété « lib »,"+\
-			" exemple « \"lib\" : \"Civilité\" ».\rPour valider, merci de fermer cette fenêtre"; \
-			"columnRules"; New object:C1471(\
-			"booleanUniqueByLine"; True:C214; \
-			"event"; New collection:C1472(New object:C1471(\
-			"name"; "clic"; \
-			"action"; "noCopyCollection"))))
-		
-		crgpdToolWindowsForm("FormListeGenerique"; "center"; $configuration_o)
-		CONFIRM:C162("Souhaitez-vous sauvegarder vos choix pour la table « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue+" » les appliquer automatiquement ultérieurement ?"; "Oui"; "Non")
-	End if 
+	End case 
+	
+	$configuration_o:=New object:C1471(\
+		"column"; $column_c; \
+		"data"; $data_c; \
+		"title"; "Information :"; \
+		"subTitle"; "Dans cette fenêtre vous pourrez affecter pour chaque champ un type de champ (si vous avez sélectionné « Tous les champs » dans la fenêtre précédente tous les champs apparaissent et si vous n'avez sélectionné qu'un seul "+\
+		"champ uniquement celui-ci apparaît).\rCe type de champ fait référence au type de champ indiqué dans le fichier de config du composant (Dossier Resources/cioRgpd/config.json) et plus précisement à la propriété « lib »,"+\
+		" exemple « \"lib\" : \"Civilité\" ».\rPour valider, merci de fermer cette fenêtre"; \
+		"columnRules"; New object:C1471(\
+		"booleanUniqueByLine"; True:C214; \
+		"event"; New collection:C1472(New object:C1471(\
+		"name"; "clic"; \
+		"action"; "noCopyCollection"))))
+	
+	crgpdToolWindowsForm("FormListeGenerique"; "center"; $configuration_o)
+	CONFIRM:C162("Souhaitez-vous sauvegarder vos choix pour la table « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue+" » les appliquer automatiquement ultérieurement ?"; "Oui"; "Non")
 	
 	For each ($element_o; $data_c)
 		$collection_c:=OB Entries:C1720($element_o)
@@ -244,7 +210,7 @@ Fin de chaque */
 	End if 
 	
 Function generateValue($type_o : Object; $typeDefaut_v : Variant; $valueDefaut_v : Variant)->$value_v : Variant
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.generateValue
 	
 Générer une valeur pour anonymiser un champ d'une table
@@ -255,8 +221,8 @@ $valueDefaut_v -> Valeur par défaut du champ à anonymiser
 $value_v <- Valeur du champ une fois anonymiser
 	
 Historique
-17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
 	var $random_el; $nbJour_el : Integer
 	var $collection_c : Collection
 	
@@ -289,20 +255,20 @@ Historique
 	End if 
 	
 Function getData($collectionToComplete_p : Pointer)
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.getData
 	
 Obtenir les valeurs du/des champs d'une table pour les anonymiser
 	
 Paramètre
-					$collectionToComplete_p <-> Pointeur de la collection qui contient tous \
-										les enregistrements par rapport au(x) champ(s) et à la table recherchée
+$collectionToComplete_p <-> Pointeur de la collection qui contient tous
+les enregistrements par rapport au(x) champ(s) et à la table recherchée
 	
 Historique
-17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
 	var $table_t; $champ_t : Text
-	var $table_o : Object
+	var $table_o; $enregistrement_o; $entity_o : Object
 	
 	$table_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue
 	$champ_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue
@@ -316,37 +282,68 @@ Historique
 		
 		$collectionToComplete_p->push(New object:C1471)
 		
-		For each ($propriete_t; $enregistrement_o)
-			
-			If ($champ_t="Tous les champs") | ($champ_t=$propriete_t)
-				$collectionToComplete_p->[$collectionToComplete_p->length-1][$propriete_t]:=$enregistrement_o[$propriete_t]
-				$collectionToComplete_p->[$collectionToComplete_p->length-1].table:=$table_t
-				$collectionToComplete_p->[$collectionToComplete_p->length-1].champ:=Choose:C955($champ_t="Tous les champs"; $champ_t; $propriete_t)
-				$collectionToComplete_p->[$collectionToComplete_p->length-1].champType:=Choose:C955($champ_t="Tous les champs"; ""; Value type:C1509($enregistrement_o[$propriete_t]))
-				$collectionToComplete_p->[$collectionToComplete_p->length-1].primaryKey:=$enregistrement_o.getKey()
-			End if 
-			
-		End for each 
+		If ($champ_t="Tous les champs")
+			$entity_o:=$enregistrement_o.toObject()
+		Else 
+			$entity_o:=$enregistrement_o.toObject($champ_t)
+		End if 
 		
+		$collectionToComplete_p->[$collectionToComplete_p->length-1]:=cwToolObjectMerge($collectionToComplete_p->[$collectionToComplete_p->length-1]; $entity_o)
+		$collectionToComplete_p->[$collectionToComplete_p->length-1].table:=$table_t
+		$collectionToComplete_p->[$collectionToComplete_p->length-1].champ:=$champ_t
+		
+		If ($champ_t="Tous les champs")
+			$collectionToComplete_p->[$collectionToComplete_p->length-1].champType:=""
+		Else 
+			$collectionToComplete_p->[$collectionToComplete_p->length-1].champType:=Value type:C1509($enregistrement_o[$champ_t])
+		End if 
+		
+		$collectionToComplete_p->[$collectionToComplete_p->length-1].primaryKey:=$enregistrement_o.getKey()
 	End for each 
 	
 	crgpdToolProgressBar(1; "arrêt")
 	
-Function resizeFullWidth($fullWidth_b; $objet_c : Collection)
-/* -----------------------------------------------------------------------------
-Fonction : RGPDDisplay.resizeFullWidth
+Function checkSaveFileExist()->$exist_b : Boolean
+/*------------------------------------------------------------------------------
+Fonction : RGPDDisplay.checkSaveFileExist
 	
-					Permet de resizer par programmation un ojet pour l'adapter au plein écran ou \
-										à la taille d'origine de la fenêtre
+Permet de savoir si dans le fichier de sauvegarde du composant il existe déjà
+une correspondance entre la table et le champ sélectionné
 	
 Paramètre
-					$fullWidth_b -> Booléen qui indique si on est dans le cas d'une resize \
-										d'un objet pour le plein écran
+	
+Historique
+11/03/22 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+	var $content_o : Object
+	var $fichier_o : 4D:C1709.File
+	var $collection_c : Collection
+	
+	$collection_c:=New collection:C1472
+	$fichier_o:=File:C1566(Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"cioRgpd"+Séparateur dossier:K24:12+"configSave.json"; fk chemin plateforme:K87:2)
+	
+	If ($fichier_o.exists=True:C214)
+		$content_o:=JSON Parse:C1218($fichier_o.getText())
+		$collection_c:=$content_o.detail.query("table = :1 AND champ = :2"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue)
+		
+		$exist_b:=($collection_c.length>0)
+	End if 
+	
+Function resizeFullWidth($fullWidth_b; $objet_c : Collection)
+/*------------------------------------------------------------------------------
+Fonction : RGPDDisplay.resizeFullWidth
+	
+Permet de resizer par programmation un ojet pour l'adapter au plein écran ou 
+à la taille d'origine de la fenêtre
+	
+Paramètre
+$fullWidth_b -> Booléen qui indique si on est dans le cas d'une resize 
+d'un objet pour le plein écran
 $objet_c -> Collection qui contient tous les noms d'objet à appliquer la resize
 	
 Historique
-17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
 	var $objet_t : Text
 	var $gauche_el; $haut_el; $droite_el; $bas_el : Integer
 	var $pointeur_p : Pointer
@@ -378,7 +375,7 @@ Historique
 	End for each 
 	
 Function resizeWindows($nbColonne_el : Integer; $refFenetre_el : Integer)
-/* -----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.resizeWindows
 	
 Permet de resizer par programmation la fenêtre qui affiche les éléments à anonymiser
@@ -388,8 +385,8 @@ $nbColonne_el -> Nombre de colonne que la listbox doit contenir
 $refFenetre_el -> Référence de la fenêtre où est située la listbox
 	
 Historique
-17/02/22 - Rémy Scanu remy@connect-io.fr> - Création
------------------------------------------------------------------------------*/
+17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
 	var $gauche_el; $haut_el; $bas_el; $droite_el; $moitie_el; $largeur_el; $largeurForm_el; $hauteurForm_el; $gaucheCalcul_el; $droiteCalcul_el : Integer
 	
 	$largeur_el:=Screen width:C187(*)

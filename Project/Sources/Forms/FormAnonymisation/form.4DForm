@@ -183,11 +183,26 @@
 					"fontSize": 10,
 					"dataSource": "Form:C1466.useParamSave",
 					"method": "ObjectMethods/Case à cocher.4dm"
+				},
+				"Zone de saisie1": {
+					"type": "input",
+					"left": 10,
+					"top": 247,
+					"width": 220,
+					"height": 80,
+					"enterable": false,
+					"focusable": false,
+					"contextMenu": "none",
+					"fontWeight": "bold",
+					"fontFamily": "Arial",
+					"fontSize": 12,
+					"fill": "transparent",
+					"borderStyle": "none"
 				}
 			}
 		}
 	],
-	"geometryStamp": 111,
+	"geometryStamp": 127,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

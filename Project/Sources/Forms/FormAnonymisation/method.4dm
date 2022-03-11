@@ -12,6 +12,8 @@ Case of
 		$data_c:=New collection:C1472
 		$collection_c:=Formula from string:C1601("cioToolsGetStructureDetailClt").call()
 		
+		OBJECT Get pointer:C1124(Objet nommé:K67:5; "Zone de saisie1")->:=""
+		
 		If (Bool:C1537(Form:C1466.changeTable)=True:C214)
 			$collection_c:=$collection_c.query("table = :1"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue)[0].champ
 			$collection_c.unshift("Tous les champs")
@@ -66,6 +68,11 @@ Case of
 			$class_o.resizeWindows($nbBoucle_el; $refFenetre_el)  // On redimensionne la fenêtre du formulaire
 			$class_o.resizeFullWidth(($nbBoucle_el>1); New collection:C1472("Zone de saisie"; "Bouton"))  // On redimensionne la listBox par rapport à la taille de la fenêtre modifiée juste avant
 			$class_o.centerElementInWindows(New collection:C1472("Texte"); $refFenetre_el)  // On centre les objets par rapport à la taille de la fenêter modifiée juste avant
+			
+			If ($class_o.checkSaveFileExist()=True:C214)
+				OBJECT Get pointer:C1124(Objet nommé:K67:5; "Zone de saisie1")->:="Il existe déjà une sauvegarde du paramétrage pour la table « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue\
+					+" » et le champ « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue+" »"
+			End if 
 			
 			OBJECT SET ENABLED:C1123(*; "Bouton"; True:C214)
 		End if 

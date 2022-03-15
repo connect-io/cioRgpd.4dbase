@@ -18,28 +18,33 @@ Case of
 				$class_o:=crgpdToolGetClass("RGPDDisplay").new()
 				$typeData_c:=$class_o.chooseTypeData()
 				
-				crgpdToolProgressBar(0; "Initialisation"; True:C214)
+				$collection_c:=$typeData_c.query("type # :1"; "Type par défaut du champ")
 				
-				For each ($element_o; Form:C1466.elementSelection)
-					crgpdToolProgressBar((Form:C1466.elementSelection.indexOf($element_o)+1)/Form:C1466.elementSelection.length; "Anonymisation de votre sélection en cours..."; True:C214)
-					$enregistrement_o:=ds:C1482[$element_o.table].get($element_o.primaryKey)
+				If ($collection_c.length>0)
+					crgpdToolProgressBar(0; "Initialisation"; True:C214)
 					
-					If ($enregistrement_o#Null:C1517)
+					For each ($element_o; Form:C1466.elementSelection) Until (progressBar_el=0)
+						crgpdToolProgressBar((Form:C1466.elementSelection.indexOf($element_o)+1)/Form:C1466.elementSelection.length; "Anonymisation de votre sélection en cours..."; True:C214)
+						$enregistrement_o:=ds:C1482[$element_o.table].get($element_o.primaryKey)
 						
-						For each ($type_o; $typeData_c)
-							$class_o.applyValue($enregistrement_o; $element_o; $type_o)
-						End for each 
+						If ($enregistrement_o#Null:C1517)
+							
+							For each ($type_o; $typeData_c)
+								$class_o.applyValue($enregistrement_o; $element_o; $type_o)
+							End for each 
+							
+						End if 
 						
-					End if 
+					End for each 
 					
-				End for each 
+					crgpdToolProgressBar(1; "arrêt")
+					
+					Form:C1466.changeChamp:=True:C214
+					POST OUTSIDE CALL:C329(Current process:C322)
+				End if 
 				
 			End if 
 			
-			crgpdToolProgressBar(1; "arrêt")
-			
-			Form:C1466.changeChamp:=True:C214
-			POST OUTSIDE CALL:C329(Current process:C322)
 		Else 
 			ALERT:C41("Merci de sélectionner un/ou plusieurs enregistrements")
 		End if 

@@ -62,6 +62,7 @@ Case of
 					OBJECT SET VISIBLE:C603(*; "Colonne"+String:C10($i_el); False:C215)
 				End if 
 				
+				OBJECT SET ENTERABLE:C238(*; "Colonne"+String:C10($i_el); False:C215)
 				OBJECT SET TITLE:C194(*; "Entête"+String:C10($i_el); $collection_c[$i_el-1])
 			End for 
 			

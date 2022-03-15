@@ -93,7 +93,9 @@
 					"fill": "transparent",
 					"bottom": 100,
 					"fontWeight": "bold",
-					"dataSource": "Form:C1466.subTitle"
+					"dataSource": "Form:C1466.subTitle",
+					"enterable": false,
+					"focusable": false
 				},
 				"Zone de saisie": {
 					"type": "input",
@@ -108,7 +110,9 @@
 					"bottom": 45,
 					"fontWeight": "bold",
 					"textDecoration": "underline",
-					"dataSource": "Form:C1466.title"
+					"dataSource": "Form:C1466.title",
+					"enterable": false,
+					"focusable": false
 				}
 			}
 		}

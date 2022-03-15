@@ -94,6 +94,10 @@ Historique
 			$colonne_o["text-align"]:=3  // Centre
 		End if 
 		
+		If ($column_c.indexOf($colonne_o)=0)
+			$colonne_o["not-enterable"]:=True:C214
+		End if 
+		
 	End for each 
 	
 	For ($i_el; 0; Storage:C1525.rgpd.champ.length-1)
@@ -119,7 +123,6 @@ Historique
 			
 		Else 
 			$element_o:=cwToolObjectMerge(New object:C1471("lib"; $champ_t); $base_o)
-			
 			$data_c.push(OB Copy:C1225($element_o))
 	End case 
 	
@@ -132,6 +135,7 @@ Historique
 		" exemple « \"lib\" : \"Civilité\" ».\rPour valider, merci de fermer cette fenêtre"; \
 		"columnRules"; New object:C1471(\
 		"booleanUniqueByLine"; True:C214; \
+		"notEnterable"; True:C214; \
 		"event"; New collection:C1472(New object:C1471(\
 		"name"; "clic"; \
 		"action"; "noCopyCollection"))))
@@ -280,15 +284,12 @@ Historique
 	For each ($enregistrement_o; $table_o) Until (progressBar_el=0)
 		crgpdToolProgressBar(($enregistrement_o.indexOf($table_o)+1)/$table_o.length; "Extraction des données en cours..."; True:C214)
 		
-		$collectionToComplete_p->push(New object:C1471)
-		
 		If ($champ_t="Tous les champs")
-			$entity_o:=$enregistrement_o.toObject()
+			$collectionToComplete_p->push($enregistrement_o.toObject())
 		Else 
-			$entity_o:=$enregistrement_o.toObject($champ_t)
+			$collectionToComplete_p->push($enregistrement_o.toObject($champ_t))
 		End if 
 		
-		$collectionToComplete_p->[$collectionToComplete_p->length-1]:=cwToolObjectMerge($collectionToComplete_p->[$collectionToComplete_p->length-1]; $entity_o)
 		$collectionToComplete_p->[$collectionToComplete_p->length-1].table:=$table_t
 		$collectionToComplete_p->[$collectionToComplete_p->length-1].champ:=$champ_t
 		

@@ -26,6 +26,10 @@ Case of
 				OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "Colonne"+String:C10($i_el); Form:C1466.column[$i_el-1]["text-align"])
 			End if 
 			
+			If (Bool:C1537(Form:C1466.column[$i_el-1]["not-enterable"])=True:C214)
+				OBJECT SET ENTERABLE:C238(*; "Colonne"+String:C10($i_el); False:C215)
+			End if 
+			
 			OBJECT SET TITLE:C194(*; "Entête"+String:C10($i_el); Form:C1466.column[$i_el-1].titre)
 		End for 
 		

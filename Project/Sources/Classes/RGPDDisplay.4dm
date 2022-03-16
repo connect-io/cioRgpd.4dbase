@@ -15,14 +15,16 @@ Applique une valeur aléatoire pour anonymiser un champ d'une table
 	
 Paramètre
 $enregistrement_o -> Entité à anonymiser
-$element_o -> Objet créer dans la function getData (avec les propriétés table, champ, champType, primaryKey)
+$element_o -> Objet créé (avec les propriétés table, champ, champType, primaryKey)
 $type_o -> Type de valeur attendue (nom, prénom, adresse etc.)
 	
 Historique
 17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
+	var $avatar_o : Object
+	
 	If ($element_o.champ="Tous les champs")
-		$enregistrement_o[$type_o.lib]:=This:C1470.generateValue($type_o; Value type:C1509($enregistrement_o[$type_o.lib]); $enregistrement_o[$type_o.lib])
+		$enregistrement_o[$type_o.lib]:=This:C1470.generateValue($type_o; $enregistrement_o[$type_o.lib])
 	Else 
 		$enregistrement_o[$element_o.champ]:=This:C1470.generateValue($type_o; $element_o.champType; $enregistrement_o[$element_o.champ])
 	End if 
@@ -129,10 +131,11 @@ Historique
 	$configuration_o:=New object:C1471(\
 		"column"; $column_c; \
 		"data"; $data_c; \
-		"title"; "Information :"; \
+		"title"; "Information"; \
 		"subTitle"; "Dans cette fenêtre vous pourrez affecter pour chaque champ un type de champ (si vous avez sélectionné « Tous les champs » dans la fenêtre précédente tous les champs apparaissent et si vous n'avez sélectionné qu'un seul "+\
 		"champ uniquement celui-ci apparaît).\rCe type de champ fait référence au type de champ indiqué dans le fichier de config du composant (Dossier Resources/cioRgpd/config.json) et plus précisement à la propriété « lib »,"+\
-		" exemple « \"lib\" : \"Civilité\" ».\rPour valider, merci de fermer cette fenêtre"; \
+		" exemple « \"lib\" : \"Civilité\" »."; \
+		"textButtonValidation"; "Anonymiser"; \
 		"columnRules"; New object:C1471(\
 		"booleanUniqueByLine"; True:C214; \
 		"notEnterable"; True:C214; \
@@ -141,70 +144,74 @@ Historique
 		"action"; "noCopyCollection"))))
 	
 	crgpdToolWindowsForm("FormListeGenerique"; "center"; $configuration_o)
-	CONFIRM:C162("Souhaitez-vous sauvegarder vos choix pour la table « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue+" » les appliquer automatiquement ultérieurement ?"; "Oui"; "Non")
 	
-	For each ($element_o; $data_c)
-		$collection_c:=OB Entries:C1720($element_o)
+	If (OK=1)
+		CONFIRM:C162("Souhaitez-vous sauvegarder vos choix pour la table « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue+" » et les appliquer automatiquement ultérieurement ?"; "Oui"; "Non")
 		
-		For each ($autreElement_o; $collection_c) Until (Bool:C1537($autreElement_o.value)=True:C214)
+		For each ($element_o; $data_c)
+			$collection_c:=OB Entries:C1720($element_o)
 			
-			If (Value type:C1509($autreElement_o.value)=Est un booléen:K8:9)
+			For each ($autreElement_o; $collection_c) Until (Bool:C1537($autreElement_o.value)=True:C214)
 				
-				If ($autreElement_o.value=True:C214)
-					$type_t:=$autreElement_o.key
-				End if 
-				
-			End if 
-			
-		End for each 
-		
-		If ($type_t="")
-			$type_t:="Type par défaut du champ"
-		End if 
-		
-		$typeData_c.push(New object:C1471("lib"; $element_o.lib; "type"; $type_t))
-		CLEAR VARIABLE:C89($type_t)
-	End for each 
-	
-	If (Bool:C1537(Form:C1466.useParamSave)=False:C215)
-		
-		If (OK=1)
-			
-			If ($fichier_o.exists=False:C215)
-				
-				If ($fichier_o.create()=True:C214)
-					$content_o:=New object:C1471("detail"; New collection:C1472(New object:C1471("table"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; \
-						"champ"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue; \
-						"data"; $data_c)))
+				If (Value type:C1509($autreElement_o.value)=Est un booléen:K8:9)
 					
-					$fichier_o.setText(JSON Stringify:C1217($content_o; *))
-				Else 
-					ALERT:C41("Le fichier de sauvegarde n'a pas pu être sauvegardé")
-				End if 
-				
-			Else 
-				$content_o:=JSON Parse:C1218($fichier_o.getText())
-				
-				$collection_c:=$content_o.detail.indices("table = :1 AND champ = :2"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue)
-				$remplacer_b:=($collection_c.length=0)
-				
-				If ($collection_c.length=1)
-					CONFIRM:C162("Une sauvegarde pour la table « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue+" » et le champ « "+\
-						OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue+" » existe déjà, voulez-vous la remplacer ?"; "Oui"; "Non")
-					
-					If (OK=1)
-						$content_o.detail.remove($collection_c[0])
+					If ($autreElement_o.value=True:C214)
+						$type_t:=$autreElement_o.key
 					End if 
 					
-					$remplacer_b:=(OK=1)
 				End if 
 				
-				If ($remplacer_b=True:C214)
-					$content_o.detail.push(New object:C1471("table"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; \
-						"champ"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue; \
-						"data"; $data_c))
+			End for each 
+			
+			If ($type_t="")
+				$type_t:="Type par défaut du champ"
+			End if 
+			
+			$typeData_c.push(New object:C1471("lib"; $element_o.lib; "type"; $type_t))
+			CLEAR VARIABLE:C89($type_t)
+		End for each 
+		
+		If (Bool:C1537(Form:C1466.useParamSave)=False:C215)
+			
+			If (OK=1)
+				
+				If ($fichier_o.exists=False:C215)
 					
-					$fichier_o.setText(JSON Stringify:C1217($content_o; *))
+					If ($fichier_o.create()=True:C214)
+						$content_o:=New object:C1471("detail"; New collection:C1472(New object:C1471("table"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; \
+							"champ"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue; \
+							"data"; $data_c)))
+						
+						$fichier_o.setText(JSON Stringify:C1217($content_o; *))
+					Else 
+						ALERT:C41("Le fichier de sauvegarde n'a pas pu être sauvegardé")
+					End if 
+					
+				Else 
+					$content_o:=JSON Parse:C1218($fichier_o.getText())
+					
+					$collection_c:=$content_o.detail.indices("table = :1 AND champ = :2"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue)
+					$remplacer_b:=($collection_c.length=0)
+					
+					If ($collection_c.length=1)
+						CONFIRM:C162("Une sauvegarde pour la table « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue+" » et le champ « "+\
+							OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue+" » existe déjà, voulez-vous la remplacer ?"; "Oui"; "Non")
+						
+						If (OK=1)
+							$content_o.detail.remove($collection_c[0])
+						End if 
+						
+						$remplacer_b:=(OK=1)
+					End if 
+					
+					If ($remplacer_b=True:C214)
+						$content_o.detail.push(New object:C1471("table"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; \
+							"champ"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue; \
+							"data"; $data_c))
+						
+						$fichier_o.setText(JSON Stringify:C1217($content_o; *))
+					End if 
+					
 				End if 
 				
 			End if 
@@ -213,7 +220,7 @@ Historique
 		
 	End if 
 	
-Function generateValue($type_o : Object; $typeDefaut_v : Variant; $valueDefaut_v : Variant)->$value_v : Variant
+Function generateValue($type_o : Object; $valueDefaut_v : Variant)->$value_v : Variant
 /*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.generateValue
 	
@@ -229,6 +236,7 @@ Historique
 ------------------------------------------------------------------------------*/
 	var $random_el; $nbJour_el : Integer
 	var $collection_c : Collection
+	var $typeDefaut_v : Variant
 	
 	$collection_c:=Storage:C1525.rgpd.champ.query("libInCollection = :1"; $type_o.type)
 	
@@ -245,6 +253,7 @@ Historique
 		End if 
 		
 	Else   // Type par défaut du champ
+		$typeDefaut_v:=Value type:C1509($valueDefaut_v)
 		
 		// toDo
 		Case of 
@@ -252,57 +261,44 @@ Historique
 			: ($typeDefaut_v=Est un entier long:K8:6)
 			: ($typeDefaut_v=Est un numérique:K8:4)
 			: ($typeDefaut_v=Est une date:K8:7)
-				
 		End case 
 		
 		$value_v:=$valueDefaut_v
 	End if 
 	
-Function getData($collectionToComplete_p : Pointer)
+Function getStructureDetail()->$structureDetail_c : Collection
 /*------------------------------------------------------------------------------
-Fonction : RGPDDisplay.getData
+Fonction : RGPDDisplay.getStructureDetail
 	
-Obtenir les valeurs du/des champs d'une table pour les anonymiser
+Permet d'obtenir une collection avec le détail de la structure du client (table/champ)
 	
 Paramètre
-$collectionToComplete_p <-> Pointeur de la collection qui contient tous
-les enregistrements par rapport au(x) champ(s) et à la table recherchée
+$structureDetail_c <-> Collection qui contient pour chaque table
+le détail des champs associés à cette table
 	
 Historique
-17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
+16/03/22 - Rémy Scanu <remy@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
-	var $table_t; $champ_t : Text
-	var $table_o; $enregistrement_o; $entity_o : Object
+	var $i_el; $j_el : Integer
 	
-	$table_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue
-	$champ_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue
+	$structureDetail_c:=New collection:C1472
 	
-	$table_o:=ds:C1482[$table_t].all()
-	
-	crgpdToolProgressBar(0; "Initialisation"; True:C214)
-	
-	For each ($enregistrement_o; $table_o) Until (progressBar_el=0)
-		crgpdToolProgressBar(($enregistrement_o.indexOf($table_o)+1)/$table_o.length; "Extraction des données en cours..."; True:C214)
+	For ($i_el; 1; Get last table number:C254)
 		
-		If ($champ_t="Tous les champs")
-			$collectionToComplete_p->push($enregistrement_o.toObject())
-		Else 
-			$collectionToComplete_p->push($enregistrement_o.toObject($champ_t))
+		If (Is table number valid:C999($i_el)=True:C214)
+			$structureDetail_c.push(New object:C1471("table"; Table name:C256($i_el); "champ"; New collection:C1472))
+			
+			For ($j_el; 1; Get last field number:C255($i_el))
+				
+				If (Is field number valid:C1000($i_el; $j_el)=True:C214)
+					$structureDetail_c[$structureDetail_c.length-1].champ.push(Field name:C257($i_el; $j_el))
+				End if 
+				
+			End for 
+			
 		End if 
 		
-		$collectionToComplete_p->[$collectionToComplete_p->length-1].table:=$table_t
-		$collectionToComplete_p->[$collectionToComplete_p->length-1].champ:=$champ_t
-		
-		If ($champ_t="Tous les champs")
-			$collectionToComplete_p->[$collectionToComplete_p->length-1].champType:=""
-		Else 
-			$collectionToComplete_p->[$collectionToComplete_p->length-1].champType:=Value type:C1509($enregistrement_o[$champ_t])
-		End if 
-		
-		$collectionToComplete_p->[$collectionToComplete_p->length-1].primaryKey:=$enregistrement_o.getKey()
-	End for each 
-	
-	crgpdToolProgressBar(1; "arrêt")
+	End for 
 	
 Function checkSaveFileExist()->$exist_b : Boolean
 /*------------------------------------------------------------------------------

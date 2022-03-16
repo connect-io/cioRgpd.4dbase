@@ -10,6 +10,7 @@ Historique
 C_REAL:C285($1)
 C_TEXT:C284($2)
 C_BOOLEAN:C305($3)
+C_TEXT:C284($4)
 
 C_BOOLEAN:C305($nonTempo_b)
 
@@ -20,7 +21,13 @@ Case of
 		progressBar_el:=Progress New  // on crée une nouvelle barre
 		
 		Progress SET BUTTON ENABLED(progressBar_el; $3)
-		//Progress SET ICON(progressBar_el; Storage.image["progress-bar"]; Vrai)
+		
+		If (Count parameters:C259=4)
+			Progress SET ICON(progressBar_el; Storage:C1525.image[$4]; True:C214)
+		Else 
+			Progress SET ICON(progressBar_el; Storage:C1525.image["progress-bar"]; True:C214)
+		End if 
+		
 	: ($2="arrêt") | (Progress Stopped(progressBar_el)=True:C214)
 		
 		If (progressBar_el>0)  // Si la barre de progression n'a pas été arrêté
@@ -35,7 +42,7 @@ Case of
 	Else 
 		Progress SET PROGRESS(progressBar_el; $1; $2; True:C214)
 		
-		If (Count parameters:C259=3)
+		If (Count parameters:C259>=3)
 			$nonTempo_b:=$3
 		End if 
 		

@@ -1,18 +1,32 @@
-var $refFenetre_el; $nbColonne_el; $nbBoucle_el; $i_el : Integer
-var $pointeur_p : Pointer
+var $table_t : Text
 var $class_o : Object
-var $collection_c; $data_c : Collection
+var $collection_c; $autreCollection_c : Collection
 
 Case of 
 	: (Form event code:C388=Sur chargement:K2:1)
 		Form:C1466.objet:=New object:C1471
+		Form:C1466.loadInit:=True:C214
 		
 		POST OUTSIDE CALL:C329(Current process:C322)
 	: (Form event code:C388=Sur appel extérieur:K2:11)
-		$data_c:=New collection:C1472
-		$collection_c:=Formula from string:C1601("cioToolsGetStructureDetailClt").call()
+		$class_o:=crgpdToolGetClass("RGPDDisplay").new()
+		
+		$collection_c:=$class_o.getStructureDetail()
+		$autreCollection_c:=New collection:C1472
 		
 		OBJECT Get pointer:C1124(Objet nommé:K67:5; "Zone de saisie1")->:=""
+		OBJECT Get pointer:C1124(Objet nommé:K67:5; "Zone de saisie2")->:=""
+		
+		If (Bool:C1537(Form:C1466.loadInit)=True:C214)
+			OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->:=New object:C1471("values"; $collection_c.extract("table"); "index"; -1; "currentValue"; "Sélectionnez une table")
+			
+			
+			$autreCollection_c:=$collection_c.query("table = :1"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue).extract("champ")
+			$autreCollection_c.unshift("Tous les champs")
+			
+			OBJECT Get pointer:C1124(Objet courant:K67:2)->:=New object:C1471("values"; $autreCollection_c; "index"; -1; "currentValue"; "Sélectionnez un champ")
+			OBJECT SET ENABLED:C1123(*; "Popup Liste déroulante1"; False:C215)
+		End if 
 		
 		If (Bool:C1537(Form:C1466.changeTable)=True:C214)
 			$collection_c:=$collection_c.query("table = :1"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue)[0].champ
@@ -28,55 +42,19 @@ Case of
 		End if 
 		
 		If (Bool:C1537(Form:C1466.changeChamp)=True:C214)
-			$refFenetre_el:=Frontmost window:C447
+			$table_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue
 			
-			$class_o:=crgpdToolGetClass("RGPDDisplay").new()
-			$class_o.getData(->$data_c)
-			
-			Form:C1466.data:=New collection:C1472
-			Form:C1466.data:=$data_c.copy()
-			
+			Form:C1466.data:=ds:C1482[$table_t].all()
 			Form:C1466.useParamSave:=False:C215
-			
-			$nbColonne_el:=LISTBOX Get number of columns:C831(*; "List Box")
-			LISTBOX DELETE COLUMN:C830(*; "List Box"; 2; $nbColonne_el-1)
-			
-			$nbBoucle_el:=1
-			
-			If (OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue="Tous les champs")
-				$nbBoucle_el:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->values.length+4  // On rajoute 3 car il y a 3 propriétés en plus pour chaque ligne [table, champ, type]
-			End if 
-			
-			$collection_c:=OB Keys:C1719(Form:C1466.data[0])
-			
-			For ($i_el; 1; $nbBoucle_el)
-				$pointeur_p:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Colonne"+String:C10($i_el))
-				
-				If ($i_el=1)
-					LISTBOX SET COLUMN FORMULA:C1203(*; "Colonne1"; "This."+$collection_c[$i_el-1]; Est un texte:K8:3)
-				Else 
-					LISTBOX INSERT COLUMN FORMULA:C970(*; "List Box"; $i_el+1; "Colonne"+String:C10($i_el); "This."+$collection_c[$i_el-1]; Est un texte:K8:3; "Entête"+String:C10($i_el); $pointeur_p)
-				End if 
-				
-				If ($collection_c[$i_el-1]="table") | ($collection_c[$i_el-1]="champ") | ($collection_c[$i_el-1]="champType") | ($collection_c[$i_el-1]="primaryKey")  // Si on est sur une colonne rajouter manuellement [table, champ, type], on masque celle-ci
-					OBJECT SET VISIBLE:C603(*; "Colonne"+String:C10($i_el); False:C215)
-				End if 
-				
-				OBJECT SET ENTERABLE:C238(*; "Colonne"+String:C10($i_el); False:C215)
-				OBJECT SET TITLE:C194(*; "Entête"+String:C10($i_el); $collection_c[$i_el-1])
-			End for 
-			
-			$class_o.resizeWindows($nbBoucle_el; $refFenetre_el)  // On redimensionne la fenêtre du formulaire
-			$class_o.resizeFullWidth(($nbBoucle_el>1); New collection:C1472("Zone de saisie"; "Bouton"))  // On redimensionne la listBox par rapport à la taille de la fenêtre modifiée juste avant
-			$class_o.centerElementInWindows(New collection:C1472("Texte"); $refFenetre_el)  // On centre les objets par rapport à la taille de la fenêter modifiée juste avant
 			
 			If ($class_o.checkSaveFileExist()=True:C214)
 				OBJECT Get pointer:C1124(Objet nommé:K67:5; "Zone de saisie1")->:="Il existe déjà une sauvegarde du paramétrage pour la table « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue\
 					+" » et le champ « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue+" »"
 			End if 
 			
+			OBJECT Get pointer:C1124(Objet nommé:K67:5; "Zone de saisie2")->:=String:C10(Form:C1466.data.length)+" enregistrements à anonymiser."
 			OBJECT SET ENABLED:C1123(*; "Bouton"; True:C214)
 		End if 
 		
-		crgpdToolDeleteProperty(Form:C1466; "changeTable"; "changeChamp")
+		crgpdToolDeleteProperty(Form:C1466; "changeTable"; "changeChamp"; "loadInit")
 End case 

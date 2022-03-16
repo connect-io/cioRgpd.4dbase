@@ -1,0 +1,206 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 10,
+	"bottomMargin": 0,
+	"events": [
+		"onClick"
+	],
+	"windowTitle": "Composant cioRGPD",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"Rectangle1": {
+					"type": "rectangle",
+					"top": 313,
+					"left": 435,
+					"width": 220,
+					"height": 29,
+					"fill": "#21759B",
+					"stroke": "transparent",
+					"borderRadius": 5
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 313,
+					"left": 200,
+					"width": 220,
+					"height": 29,
+					"fill": "#21759B",
+					"stroke": "transparent",
+					"borderRadius": 5
+				},
+				"Round Rectangle": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 178,
+					"height": 363,
+					"stroke": "transparent"
+				},
+				"Texte": {
+					"type": "text",
+					"top": 19,
+					"left": 200,
+					"width": 327,
+					"height": 16,
+					"stroke": "#696969",
+					"class": "",
+					"text": "Bienvenue dans le composant cioRGPD",
+					"fontWeight": "bold",
+					"fontFamily": "Arial",
+					"fontSize": 13
+				},
+				"Texte1": {
+					"type": "text",
+					"top": 73,
+					"left": 200,
+					"width": 455,
+					"height": 193,
+					"stroke": "#696969",
+					"class": "",
+					"text": "Le composant cioRgpd permet d'anonymiser une base de donnée 4D pour être en confirmité avec les règles européenne de la RGPD. Il permet également de générer des fiches aléatoires d'une personne.",
+					"textAlign": "justify",
+					"fontSize": 12,
+					"fontFamily": "Arial"
+				},
+				"Texte2": {
+					"type": "text",
+					"top": 289,
+					"left": 200,
+					"width": 368,
+					"height": 19,
+					"stroke": "#696969",
+					"class": "font14",
+					"text": "Que souhaitez-vous faire ?",
+					"fontFamily": "Arial",
+					"fontSize": 12
+				},
+				"Bouton": {
+					"type": "button",
+					"top": 313,
+					"left": 200,
+					"width": 220,
+					"height": 30,
+					"action": "",
+					"class": "",
+					"stroke": "#FFFFFF",
+					"focusable": false,
+					"text": "Démarrer le composant",
+					"iconFrames": 4,
+					"style": "custom",
+					"method": "ObjectMethods/Bouton.4dm",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"fontFamily": "Arial",
+					"fontSize": 12
+				},
+				"Bouton1": {
+					"type": "button",
+					"top": 313,
+					"left": 435,
+					"width": 220,
+					"height": 30,
+					"class": "",
+					"stroke": "#FFFFFF",
+					"focusable": false,
+					"text": "Paramétrer le fichier de config",
+					"iconFrames": 4,
+					"style": "custom",
+					"method": "ObjectMethods/Bouton1.4dm",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"fontFamily": "Arial",
+					"fontSize": 12
+				},
+				"Bouton image": {
+					"type": "pictureButton",
+					"left": 4,
+					"top": 10,
+					"width": 170,
+					"height": 25,
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"picture": "/RESOURCES/Images/Connect-IO-noir.png",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true,
+					"method": "ObjectMethods/Bouton image.4dm"
+				},
+				"Bouton image2": {
+					"type": "pictureButton",
+					"left": 118,
+					"top": 303,
+					"width": 50,
+					"height": 50,
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"picture": "/RESOURCES/Images/github.png",
+					"method": "ObjectMethods/Bouton image2.4dm",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				},
+				"Texte3": {
+					"type": "text",
+					"top": 347,
+					"left": 625,
+					"width": 30,
+					"height": 15,
+					"stroke": "#696969",
+					"class": "",
+					"text": "v 1.0",
+					"fontWeight": "bold",
+					"fontFamily": "Arial",
+					"fontSize": 10,
+					"textAlign": "right"
+				},
+				"Bouton image1": {
+					"type": "pictureButton",
+					"left": 10,
+					"top": 303,
+					"width": 50,
+					"height": 50,
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"picture": "/RESOURCES/Images/website.png",
+					"method": "ObjectMethods/Bouton image1.4dm",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
+				}
+			}
+		}
+	],
+	"geometryStamp": 167,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}

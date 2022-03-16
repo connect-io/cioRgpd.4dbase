@@ -14,7 +14,7 @@
 	"events": [
 		"onLoad"
 	],
-	"windowTitle": "Liste",
+	"windowTitle": "Configurer l'anonymisation",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -22,6 +22,18 @@
 		},
 		{
 			"objects": {
+				"Rectangle1": {
+					"type": "rectangle",
+					"top": 10,
+					"left": 20,
+					"width": 300,
+					"height": 100,
+					"borderRadius": 5,
+					"strokeWidth": 0,
+					"fill": "#D4EAF1",
+					"stroke": "#2F96B4",
+					"sizingX": "grow"
+				},
 				"List Box": {
 					"type": "listbox",
 					"top": 120,
@@ -69,7 +81,9 @@
 							"header": {
 								"name": "Entête1",
 								"verticalAlign": "middle",
-								"text": "Header1"
+								"text": "Header1",
+								"fontFamily": "Arial",
+								"fontSize": 12
 							},
 							"footer": {
 								"name": "Footer1",
@@ -77,31 +91,35 @@
 								"verticalAlign": "middle"
 							},
 							"alternateFill": "#F4F5F5",
-							"enterable": false
+							"enterable": false,
+							"fontFamily": "Arial",
+							"fontSize": 12
 						}
 					]
 				},
 				"Zone de saisie1": {
 					"type": "input",
-					"left": 20,
+					"left": 25,
 					"top": 60,
-					"width": 300,
+					"width": 290,
 					"height": 40,
 					"fontFamily": "Arial",
 					"fontSize": 12,
 					"borderStyle": "none",
 					"fill": "transparent",
 					"bottom": 100,
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"dataSource": "Form:C1466.subTitle",
 					"enterable": false,
-					"focusable": false
+					"focusable": false,
+					"textAlign": "justify",
+					"stroke": "#2F96B4"
 				},
 				"Zone de saisie": {
 					"type": "input",
-					"left": 20,
+					"left": 55,
 					"top": 20,
-					"width": 300,
+					"width": 260,
 					"height": 25,
 					"fontFamily": "Arial",
 					"fontSize": 18,
@@ -109,15 +127,63 @@
 					"fill": "transparent",
 					"bottom": 45,
 					"fontWeight": "bold",
-					"textDecoration": "underline",
+					"textDecoration": "none",
 					"dataSource": "Form:C1466.title",
 					"enterable": false,
-					"focusable": false
+					"focusable": false,
+					"stroke": "#2F96B4"
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 540,
+					"left": 100,
+					"width": 220,
+					"height": 29,
+					"fill": "#21759B",
+					"stroke": "transparent",
+					"borderRadius": 5
+				},
+				"Bouton": {
+					"type": "button",
+					"top": 540,
+					"left": 100,
+					"width": 220,
+					"height": 30,
+					"action": "accept",
+					"class": "",
+					"stroke": "#FFFFFF",
+					"focusable": false,
+					"text": "",
+					"iconFrames": 4,
+					"style": "custom",
+					"method": "ObjectMethods/Bouton.4dm",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"fontFamily": "Arial",
+					"fontSize": 12
+				},
+				"refreshDateDebutMailClique1": {
+					"type": "pictureButton",
+					"left": 25,
+					"top": 18,
+					"width": 25,
+					"height": 25,
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"picture": "/RESOURCES/Images/info.png",
+					"method": "ObjectMethods/refreshDateDebutMailClique1.4dm",
+					"loopBackToFirstFrame": true,
+					"switchBackWhenReleased": true,
+					"useLastFrameAsDisabled": true
 				}
 			}
 		}
 	],
-	"geometryStamp": 91,
+	"geometryStamp": 152,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -65,12 +65,20 @@ Case of
 		SET WINDOW RECT:C444($gaucheCalcul_el; $haut_el; $droiteCalcul_el; $bas_el; Frontmost window:C447; *)
 		
 		If (Form:C1466.title#Null:C1517)
-			OBJECT SET COORDINATES:C1248(*; "Zone de saisie"; $gaucheCalcul_el; 20; $droiteCalcul_el)
+			OBJECT SET COORDINATES:C1248(*; "Zone de saisie"; $gaucheCalcul_el+35; 20; $droiteCalcul_el)
 		End if 
 		
 		If (Form:C1466.subTitle#Null:C1517)
-			OBJECT SET COORDINATES:C1248(*; "Zone de saisie1"; $gaucheCalcul_el; 60; $droiteCalcul_el)
+			OBJECT SET COORDINATES:C1248(*; "Zone de saisie1"; $gaucheCalcul_el+5; 60; $droiteCalcul_el)
 		End if 
 		
+		OBJECT SET COORDINATES:C1248(*; "Rectangle1"; $gaucheCalcul_el; 10; $droiteCalcul_el)
+		
+		If (Form:C1466.textButtonValidation#Null:C1517)
+			OBJECT SET TITLE:C194(*; "Bouton"; Form:C1466.textButtonValidation)
+		End if 
+		
+		OBJECT SET COORDINATES:C1248(*; "Bouton"; $droiteCalcul_el-220; 540)
+		OBJECT SET COORDINATES:C1248(*; "Rectangle"; $droiteCalcul_el-220; 540)
 		OBJECT SET COORDINATES:C1248(*; "List Box"; $gaucheCalcul_el; Choose:C955(Form:C1466.subTitle#Null:C1517; 120; 20); $droiteCalcul_el)
 End case 

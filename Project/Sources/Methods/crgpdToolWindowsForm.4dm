@@ -12,7 +12,9 @@ var $2 : Variant  // $2 = Espace en pixel entre le haut/bas de l'écran et le fo
 var $3 : Object  // $3 = Entity Selection [optionnel]
 var $4 : Pointer  // $4 = Pointeur de la Table [optionnel]
 
-var $hauteur_el; $largeur_el; $menu_el; $largeurForm_el; $hauteurForm_el; $moitie_el; $refFen_el : Integer
+var $titre_t : Text
+var $largeurFixe_b; $hauteurFixe_b : Boolean
+var $hauteur_el; $largeur_el; $menu_el; $largeurForm_el; $hauteurForm_el; $moitie_el; $refFen_el; $nbPage_el : Integer
 
 $hauteur_el:=Screen height:C188(*)
 $largeur_el:=Screen width:C187(*)
@@ -20,9 +22,9 @@ $largeur_el:=Screen width:C187(*)
 $menu_el:=Menu bar height:C440
 
 If (Count parameters:C259<4)
-	FORM GET PROPERTIES:C674($1; $largeurForm_el; $hauteurForm_el)
+	FORM GET PROPERTIES:C674($1; $largeurForm_el; $hauteurForm_el; $nbPage_el; $largeurFixe_b; $hauteurFixe_b; $titre_t)
 Else 
-	FORM GET PROPERTIES:C674($4->; $1; $largeurForm_el; $hauteurForm_el)
+	FORM GET PROPERTIES:C674($4->; $1; $largeurForm_el; $hauteurForm_el; $nbPage_el; $largeurFixe_b; $hauteurFixe_b; $titre_t)
 End if 
 
 $moitie_el:=$largeurForm_el/2
@@ -44,6 +46,8 @@ Case of
 		End case 
 		
 End case 
+
+SET WINDOW TITLE:C213($titre_t; $refFen_el)
 
 Case of 
 	: (Count parameters:C259=2)

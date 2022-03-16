@@ -9,7 +9,7 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 0,
+	"rightMargin": 10,
 	"bottomMargin": 10,
 	"events": [
 		"onLoad",
@@ -24,190 +24,171 @@
 		},
 		{
 			"objects": {
-				"Zone de saisie": {
-					"type": "input",
-					"left": 0,
-					"top": 0,
-					"width": 620,
-					"height": 40,
-					"enterable": false,
-					"focusable": false,
-					"contextMenu": "none",
-					"fill": "#424242",
-					"borderStyle": "none"
-				},
-				"Texte": {
-					"type": "text",
-					"text": "Anonymisation des données",
-					"top": 5,
-					"left": 0,
-					"width": 620,
-					"height": 29,
-					"fontSize": 24,
-					"stroke": "#FFFFFF",
-					"textAlign": "center",
-					"fontWeight": "bold",
-					"sizingX": "move"
-				},
 				"Texte1": {
 					"type": "text",
-					"top": 60,
+					"top": 14,
 					"left": 10,
 					"width": 180,
 					"height": 16,
 					"text": "Choix de la table",
 					"class": "",
-					"right": 190
+					"right": 190,
+					"fontSize": 12,
+					"fontFamily": "Arial",
+					"fontWeight": "normal"
 				},
 				"Popup Liste déroulante": {
 					"type": "dropdown",
 					"left": 10,
-					"top": 86,
+					"top": 40,
 					"width": 220,
 					"height": 25,
 					"events": [
-						"onLoad",
 						"onDataChange"
 					],
 					"method": "ObjectMethods/Popup Liste déroulante.4dm",
-					"dataSourceTypeHint": "object"
+					"dataSourceTypeHint": "object",
+					"fontSize": 12
 				},
 				"Texte2": {
 					"type": "text",
-					"top": 131,
-					"left": 10,
+					"top": 14,
+					"left": 390,
 					"width": 180,
 					"height": 16,
 					"text": "Choix du champ",
 					"class": "",
-					"right": 190
+					"right": 570,
+					"fontSize": 12,
+					"fontFamily": "Arial",
+					"fontWeight": "normal"
 				},
 				"Popup Liste déroulante1": {
 					"type": "dropdown",
-					"left": 10,
-					"top": 157,
+					"left": 390,
+					"top": 40,
 					"width": 220,
 					"height": 25,
 					"events": [
-						"onLoad",
 						"onDataChange"
 					],
 					"method": "ObjectMethods/Popup Liste déroulante1.4dm",
 					"dataSourceTypeHint": "object",
-					"focusable": false
-				},
-				"List Box": {
-					"type": "listbox",
-					"top": 60,
-					"left": 240,
-					"width": 370,
-					"height": 305,
-					"sizingY": "grow",
-					"resizingMode": "legacy",
-					"listboxType": "collection",
-					"movableRows": false,
-					"rowHeight": "30px",
-					"headerHeight": "24px",
-					"footerHeight": "10px",
-					"dataSource": "Form:C1466.data",
-					"currentItemSource": "Form:C1466.elementCourant",
-					"currentItemPositionSource": "Form:C1466.elementPosition",
-					"selectedItemsSource": "Form:C1466.elementSelection",
-					"scrollbarHorizontal": "automatic",
-					"horizontalLineStroke": "transparent",
-					"verticalLineStroke": "transparent",
-					"verticalAlign": "middle",
-					"borderStyle": "none",
-					"events": [],
-					"showFooters": false,
-					"fill": "automatic",
-					"alternateFill": "automaticAlternate",
-					"sizingX": "fixed",
-					"columns": [
-						{
-							"name": "Colonne1",
-							"dataSource": "",
-							"width": 200,
-							"minWidth": 10,
-							"maxWidth": 32000,
-							"textAlign": "left",
-							"verticalAlign": "middle",
-							"events": [
-								"onClick",
-								"onDataChange"
-							],
-							"header": {
-								"name": "Entête1",
-								"verticalAlign": "middle",
-								"text": ""
-							},
-							"footer": {
-								"name": "Footer1",
-								"timeFormat": "hh_mm_ss",
-								"verticalAlign": "middle"
-							}
-						}
-					]
-				},
-				"Bouton": {
-					"type": "button",
-					"top": 380,
-					"left": 243,
-					"width": 355,
-					"height": 24,
-					"sizingY": "move",
-					"class": "",
 					"focusable": false,
-					"text": "Anonymiser la sélection",
-					"iconFrames": 4,
-					"style": "roundedBevel",
-					"events": [
-						"onLoad",
-						"onClick"
-					],
-					"right": 598,
-					"sizingX": "grow",
-					"method": "ObjectMethods/Bouton.4dm"
+					"fontSize": 12
 				},
 				"Case à cocher": {
 					"type": "checkbox",
 					"text": "Utiliser les paramètres sauvegardés",
-					"top": 202,
+					"top": 91,
 					"left": 10,
-					"width": 220,
+					"width": 249,
 					"height": 25,
 					"events": [
 						"onClick"
 					],
 					"dataSourceTypeHint": "boolean",
-					"fontSize": 10,
+					"fontSize": 12,
 					"dataSource": "Form:C1466.useParamSave",
-					"method": "ObjectMethods/Case à cocher.4dm"
+					"method": "ObjectMethods/Case à cocher.4dm",
+					"fontWeight": "normal",
+					"fontFamily": "Arial"
 				},
 				"Zone de saisie1": {
 					"type": "input",
 					"left": 10,
-					"top": 247,
-					"width": 220,
-					"height": 80,
+					"top": 136,
+					"width": 600,
+					"height": 29,
 					"enterable": false,
 					"focusable": false,
 					"contextMenu": "none",
-					"fontWeight": "bold",
+					"fontWeight": "normal",
 					"fontFamily": "Arial",
 					"fontSize": 12,
 					"fill": "transparent",
 					"borderStyle": "none"
+				},
+				"Zone de saisie2": {
+					"type": "input",
+					"left": 10,
+					"top": 76,
+					"width": 220,
+					"height": 15,
+					"enterable": false,
+					"focusable": false,
+					"contextMenu": "none",
+					"fontWeight": "normal",
+					"fontFamily": "Arial",
+					"fontSize": 12,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"stroke": "#ff0000"
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 88,
+					"left": 390,
+					"width": 220,
+					"height": 29,
+					"fill": "#21759B",
+					"stroke": "transparent",
+					"borderRadius": 5
+				},
+				"Bouton": {
+					"type": "button",
+					"top": 88,
+					"left": 390,
+					"width": 220,
+					"height": 30,
+					"action": "",
+					"class": "",
+					"stroke": "#FFFFFF",
+					"focusable": false,
+					"text": "Configurer l'anonymisation",
+					"iconFrames": 4,
+					"style": "custom",
+					"method": "ObjectMethods/Bouton.4dm",
+					"events": [
+						"onLoad",
+						"onClick",
+						"onMouseMove"
+					],
+					"fontFamily": "Arial",
+					"fontSize": 13
+				},
+				"Texte3": {
+					"type": "text",
+					"text": "*",
+					"top": 16,
+					"left": 108,
+					"width": 5,
+					"height": 5,
+					"fontFamily": "Arial",
+					"fontSize": 12,
+					"stroke": "#ff0000"
+				},
+				"Texte4": {
+					"type": "text",
+					"text": "*",
+					"top": 16,
+					"left": 485,
+					"width": 5,
+					"height": 5,
+					"fontFamily": "Arial",
+					"fontSize": 12,
+					"stroke": "#ff0000"
 				}
 			}
 		}
 	],
-	"geometryStamp": 127,
+	"geometryStamp": 331,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
-			"View 1": {}
+			"View 1": {},
+			"View 2": {}
 		}
 	},
 	"method": "method.4dm"

@@ -5,18 +5,17 @@ Class de gestion du formulaire d'anonymisation
 
 ------------------------------------------------------------------------------*/
 
-Class constructor
-	
+
 Function applyValue($enregistrement_o : Object; $element_o : Object; $type_o : Object)
 /*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.applyValue
 	
 Applique une valeur aléatoire pour anonymiser un champ d'une table
 	
-Paramètre
+Paramètres
 $enregistrement_o -> Entité à anonymiser
-$element_o -> Objet créé (avec les propriétés table, champ, champType, primaryKey)
-$type_o -> Type de valeur attendue (nom, prénom, adresse etc.)
+$element_o        -> Objet créé (avec les propriétés table, champ, champType, primaryKey)
+$type_o           -> Type de valeur attendue (nom, prénom, adresse etc.)
 	
 Historique
 17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
@@ -31,14 +30,15 @@ Historique
 	
 	$enregistrement_o.save()
 	
+	
 Function centerElementInWindows($objet_c : Collection; $refFenetre_el : Integer)
 /*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.centerElementInWindows
 	
 Permet de centrer par programmation des objets par rapport à la taille de la fenêtre
 	
-Paramètre
-$objet_c -> Collection qui contient tous les noms d'objet à appliquer la resize
+Paramètres
+$objet_c       -> Collection qui contient tous les noms d'objet à appliquer la resize
 $refFenetre_el -> Référence de la fenêtre où est située la listbox
 	
 Historique
@@ -60,6 +60,7 @@ Historique
 		
 	End for each 
 	
+	
 Function chooseTypeData()->$typeData_c : Collection
 /*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.chooseTypeData
@@ -80,11 +81,11 @@ Historique
 	ASSERT:C1129(Storage:C1525.rgpd#Null:C1517; "La méthode crgpdStart doit être exécuter sur démarrage de la base")
 	
 	$base_o:=New object:C1471
-	$fichier_o:=File:C1566(Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"cioRgpd"+Séparateur dossier:K24:12+"configSave.json"; fk chemin plateforme:K87:2)
+	$fichier_o:=File:C1566(Get 4D folder:C485(Current resources folder:K5:16; *)+"cioRgpd"+Folder separator:K24:12+"configSave.json"; fk platform path:K87:2)
 	
 	crgpdToolNewCollection(->$data_c; ->$column_c; ->$typeData_c; ->$collection_c)
 	
-	$champ_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue
+	$champ_t:=OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante1")->currentValue
 	
 	// Création des colonnes
 	$column_c:=Storage:C1525.rgpd.champ.extract("lib"; "titre")
@@ -111,10 +112,10 @@ Historique
 		: (Bool:C1537(Form:C1466.useParamSave)=True:C214)
 			$content_o:=JSON Parse:C1218($fichier_o.getText())
 			
-			$data_c:=$content_o.detail.query("table = :1 AND champ = :2"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue)[0].data
+			$data_c:=$content_o.detail.query("table = :1 AND champ = :2"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante1")->currentValue)[0].data
 		: ($champ_t="Tous les champs")
 			
-			For each ($element_t; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->values)
+			For each ($element_t; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante1")->values)
 				$element_o:=cwToolObjectMerge(New object:C1471("lib"; $element_t); $base_o)
 				
 				If ($element_t#"Tous les champs")
@@ -146,14 +147,14 @@ Historique
 	crgpdToolWindowsForm("FormListeGenerique"; "center"; $configuration_o)
 	
 	If (OK=1)
-		CONFIRM:C162("Souhaitez-vous sauvegarder vos choix pour la table « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue+" » et les appliquer automatiquement ultérieurement ?"; "Oui"; "Non")
+		CONFIRM:C162("Souhaitez-vous sauvegarder vos choix pour la table « "+OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue+" » et les appliquer automatiquement ultérieurement ?"; "Oui"; "Non")
 		
 		For each ($element_o; $data_c)
 			$collection_c:=OB Entries:C1720($element_o)
 			
 			For each ($autreElement_o; $collection_c) Until (Bool:C1537($autreElement_o.value)=True:C214)
 				
-				If (Value type:C1509($autreElement_o.value)=Est un booléen:K8:9)
+				If (Value type:C1509($autreElement_o.value)=Is boolean:K8:9)
 					
 					If ($autreElement_o.value=True:C214)
 						$type_t:=$autreElement_o.key
@@ -178,8 +179,8 @@ Historique
 				If ($fichier_o.exists=False:C215)
 					
 					If ($fichier_o.create()=True:C214)
-						$content_o:=New object:C1471("detail"; New collection:C1472(New object:C1471("table"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; \
-							"champ"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue; \
+						$content_o:=New object:C1471("detail"; New collection:C1472(New object:C1471("table"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue; \
+							"champ"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante1")->currentValue; \
 							"data"; $data_c)))
 						
 						$fichier_o.setText(JSON Stringify:C1217($content_o; *))
@@ -190,12 +191,12 @@ Historique
 				Else 
 					$content_o:=JSON Parse:C1218($fichier_o.getText())
 					
-					$collection_c:=$content_o.detail.indices("table = :1 AND champ = :2"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue)
+					$collection_c:=$content_o.detail.indices("table = :1 AND champ = :2"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante1")->currentValue)
 					$remplacer_b:=($collection_c.length=0)
 					
 					If ($collection_c.length=1)
-						CONFIRM:C162("Une sauvegarde pour la table « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue+" » et le champ « "+\
-							OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue+" » existe déjà, voulez-vous la remplacer ?"; "Oui"; "Non")
+						CONFIRM:C162("Une sauvegarde pour la table « "+OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue+" » et le champ « "+\
+							OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante1")->currentValue+" » existe déjà, voulez-vous la remplacer ?"; "Oui"; "Non")
 						
 						If (OK=1)
 							$content_o.detail.remove($collection_c[0])
@@ -205,8 +206,8 @@ Historique
 					End if 
 					
 					If ($remplacer_b=True:C214)
-						$content_o.detail.push(New object:C1471("table"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; \
-							"champ"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue; \
+						$content_o.detail.push(New object:C1471("table"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue; \
+							"champ"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante1")->currentValue; \
 							"data"; $data_c))
 						
 						$fichier_o.setText(JSON Stringify:C1217($content_o; *))
@@ -220,16 +221,17 @@ Historique
 		
 	End if 
 	
+	
 Function generateValue($type_o : Object; $valueDefaut_v : Variant)->$value_v : Variant
 /*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.generateValue
 	
 Générer une valeur pour anonymiser un champ d'une table
 	
-Paramètre
-$type_o -> Type de valeur attendue (nom, prénom, adresse etc.)
+Paramètres
+$type_o        -> Type de valeur attendue (nom, prénom, adresse etc.)
 $valueDefaut_v -> Valeur par défaut du champ à anonymiser
-$value_v <- Valeur du champ une fois anonymiser
+$value_v       <- Valeur du champ une fois anonymiser
 	
 Historique
 17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
@@ -257,14 +259,15 @@ Historique
 		
 		// toDo
 		Case of 
-			: ($typeDefaut_v=Est un texte:K8:3)
-			: ($typeDefaut_v=Est un entier long:K8:6)
-			: ($typeDefaut_v=Est un numérique:K8:4)
-			: ($typeDefaut_v=Est une date:K8:7)
+			: ($typeDefaut_v=Is text:K8:3)
+			: ($typeDefaut_v=Is longint:K8:6)
+			: ($typeDefaut_v=Is real:K8:4)
+			: ($typeDefaut_v=Is date:K8:7)
 		End case 
 		
 		$value_v:=$valueDefaut_v
 	End if 
+	
 	
 Function getStructureDetail()->$structureDetail_c : Collection
 /*------------------------------------------------------------------------------
@@ -300,6 +303,7 @@ Historique
 		
 	End for 
 	
+	
 Function checkSaveFileExist()->$exist_b : Boolean
 /*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.checkSaveFileExist
@@ -317,11 +321,11 @@ Historique
 	var $collection_c : Collection
 	
 	$collection_c:=New collection:C1472
-	$fichier_o:=File:C1566(Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"cioRgpd"+Séparateur dossier:K24:12+"configSave.json"; fk chemin plateforme:K87:2)
+	$fichier_o:=File:C1566(Get 4D folder:C485(Current resources folder:K5:16; *)+"cioRgpd"+Folder separator:K24:12+"configSave.json"; fk platform path:K87:2)
 	
 	If ($fichier_o.exists=True:C214)
 		$content_o:=JSON Parse:C1218($fichier_o.getText())
-		$collection_c:=$content_o.detail.query("table = :1 AND champ = :2"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante1")->currentValue)
+		$collection_c:=$content_o.detail.query("table = :1 AND champ = :2"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante1")->currentValue)
 		
 		$exist_b:=($collection_c.length>0)
 	End if 
@@ -335,8 +339,8 @@ Permet de resizer par programmation un ojet pour l'adapter au plein écran ou
 	
 Paramètre
 $fullWidth_b -> Booléen qui indique si on est dans le cas d'une resize 
-d'un objet pour le plein écran
-$objet_c -> Collection qui contient tous les noms d'objet à appliquer la resize
+                d'un objet pour le plein écran
+$objet_c     -> Collection qui contient tous les noms d'objet à appliquer la resize
 	
 Historique
 17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
@@ -346,7 +350,7 @@ Historique
 	var $pointeur_p : Pointer
 	
 	For each ($objet_t; $objet_c)
-		$pointeur_p:=OBJECT Get pointer:C1124(Objet nommé:K67:5; $objet_t)
+		$pointeur_p:=OBJECT Get pointer:C1124(Object named:K67:5; $objet_t)
 		
 		If (Is nil pointer:C315($pointeur_p)=False:C215)
 			OBJECT GET COORDINATES:C663(*; $objet_t; $gauche_el; $haut_el; $droite_el; $bas_el)
@@ -371,6 +375,7 @@ Historique
 		
 	End for each 
 	
+	
 Function resizeWindows($nbColonne_el : Integer; $refFenetre_el : Integer)
 /*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.resizeWindows
@@ -378,7 +383,7 @@ Fonction : RGPDDisplay.resizeWindows
 Permet de resizer par programmation la fenêtre qui affiche les éléments à anonymiser
 	
 Paramètre
-$nbColonne_el -> Nombre de colonne que la listbox doit contenir
+$nbColonne_el  -> Nombre de colonne que la listbox doit contenir
 $refFenetre_el -> Référence de la fenêtre où est située la listbox
 	
 Historique

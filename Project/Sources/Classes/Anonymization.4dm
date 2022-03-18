@@ -5,7 +5,6 @@ Class qui permet l'anonymisation d'une table.
 
 ------------------------------------------------------------------------------*/
 
-
 Class constructor($dataClass_t : Text)
 /*------------------------------------------------------------------------------
 Fonction : Anonymization.new
@@ -18,12 +17,10 @@ $dataClass_t -> Table dans lequel est éxécuté le traitement.
 Historique
 18/03/22 - Grégory Fromain <gregory@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
-	
-	This:C1470.dataClass_t:=$dataClass_t  // Nom de la table
+	This:C1470.dataClass_t:=$dataClass_t  // Nom de la dataclasse
 	This:C1470.data_es:=ds:C1482[$dataClass_t].all()
+	
 	This:C1470.relation_c:=New collection:C1472()
-	
-	
 	
 Function relationUpdate($relation_c : Collection)
 /*------------------------------------------------------------------------------
@@ -37,10 +34,7 @@ $relation_c -> Relations entre les champs et le type d'anonymisation.
 Historique
 18/03/22 - Grégory Fromain <gregory@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
-	
 	This:C1470.relation_c:=$relation_c
-	
-	
 	
 Function relationReload()
 /*------------------------------------------------------------------------------
@@ -50,18 +44,17 @@ Rechargement des relations entre les champs et le type d'anonymisation depuis
 le fichier relation.json
 	
 Historique
-18/03/22 - Grégory Fromain gregory@connect-io.fr> - Création
+18/03/22 - Grégory Fromain <gregory@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
 	var $dataClassRelation_c : Collection
 	
 	This:C1470.relation_c:=New collection:C1472()
 	
 	$dataClassRelation_c:=JSON Parse:C1218(Storage:C1525.relation_f.getText()).detail.query("table = :1"; This:C1470.dataClass_t)
+	
 	If ($dataClassRelation_c.length=1)
 		This:C1470.relation_c:=$dataClassRelation_c[0].data
 	End if 
-	
-	
 	
 Function relationSave()
 /*------------------------------------------------------------------------------
@@ -73,7 +66,6 @@ le fichier relation.json
 Historique
 18/03/22 - Grégory Fromain <gregory@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
-	
 	var $content_o : Object
 	var $dataClassRelation_c : Collection
 	
@@ -88,8 +80,6 @@ Historique
 	$content_o.detail.push(New object:C1471("table"; This:C1470.dataClass_t; "data"; This:C1470.relation_c))
 	Storage:C1525.relation_f.setText(JSON Stringify:C1217($content_o; *))
 	
-	
-	
 Function go()
 /*------------------------------------------------------------------------------
 Fonction : Anonymization.go
@@ -99,7 +89,6 @@ Lancement de l'anonymisation.
 Historique
 18/03/22 - Grégory Fromain <gregory@connect-io.fr> - Création
 ------------------------------------------------------------------------------*/
-	
 	var $entity_o : Object
 	var $type_o : Object
 	var progressBar_el : Integer
@@ -121,8 +110,6 @@ Historique
 	
 	crgpdToolProgressBar(1; "arrêt")
 	
-	
-	
 Function generateValue($type_o : Object; $valueDefaut_v : Variant)->$value_v : Variant
 /*------------------------------------------------------------------------------
 Fonction : Anonymization.generateValue
@@ -138,7 +125,6 @@ Historiques
 17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
 18/03/22 - Grégory Fromain <gregory@connect-io.fr> - Reprise du code de Rémy.
 ------------------------------------------------------------------------------*/
-	
 	var $nbDay_el : Integer  // Nombre de jour entre 2 dates.
 	var $random_el : Integer  // Nombre aléatoire entre 2 dates.
 	var $collection_c : Collection
@@ -158,6 +144,5 @@ Historiques
 		End if 
 		
 	Else   // Type par défaut du champ
-		
 		$value_v:=$valueDefaut_v
 	End if 

@@ -3,7 +3,6 @@
         {
             "label" : "Civilité",
             "lib" : "civilite",
-            "type" : "text",
             "value" : [
                 "M.",
                 "Mme",
@@ -13,7 +12,6 @@
         {
             "label" : "Nom",
             "lib" : "nom",
-            "type" : "text",
             "value" : [
                 "Martin",
                 "Bernard",
@@ -51,7 +49,6 @@
         {
             "label" : "Prénom",
             "lib" : "prenom",
-            "type" : "text",
             "value" : [
                 "Léo",
                 "Gabriel",
@@ -89,7 +86,6 @@
         {
             "label" : "Date de naissance",
             "lib" : "dateNaissance",
-            "type" : "date",
             "value" : {
                 "debut" : "01/01/1950",
                 "fin" : "31/12/2000"
@@ -98,7 +94,6 @@
         {
             "label" : "Adresse complète",
             "lib" : "adresseComplete",
-            "type" : "text",
             "value" : [
                 "Bd de Parc, 77700 Coupvray",
                 "Rue de Rivoli, 75001 Paris",
@@ -128,7 +123,6 @@
         {
             "label" : "Adresse",
             "lib" : "adresse",
-            "type" : "text",
             "value" : [
                 "Bd de Parc",
                 "Rue de Rivoli",
@@ -158,7 +152,6 @@
         {
             "label" : "Code postal",
             "lib" : "codePostal",
-            "type" : "text",
             "value" : [
                 "77700",
                 "75001",
@@ -187,7 +180,6 @@
         {
             "label" : "Ville",
             "lib" : "ville",
-            "type" : "text",
             "value" : [
                 "Coupvray",
                 "Paris",
@@ -205,6 +197,54 @@
                 "Uvernet-Fours",
                 "Lyon",
                 "Montpellier"
+            ]
+        },
+        {
+            "label" : "Téléphone fixe",
+            "lib" : "telFixe",
+            "value" : [
+                "0111223344",
+                "0211223344",
+                "0311223344",
+                "0411223344",
+                "0511223344",
+                "0611223344",
+                "0711223344",
+                "0811223344",
+                "0911223344",
+                "0155667788"
+            ]
+        },
+        {
+            "label" : "Téléphone mobile",
+            "lib" : "telMobile",
+            "value" : [
+                "0600000000",
+                "0611111111",
+                "0622222222",
+                "0633333333",
+                "0644444444",
+                "0655555555",
+                "0666666666",
+                "0677777777",
+                "0688888888",
+                "0699999999"
+            ]
+        },
+        {
+            "label" : "Email",
+            "lib" : "email",
+            "value" : [
+                "remy@connect-io.fr",
+                "remy1@connect-io.fr",
+                "remy2@connect-io.fr",
+                "remy3@connect-io.fr",
+                "remy4@connect-io.fr",
+                "remy5@connect-io.fr",
+                "remy6@connect-io.fr",
+                "remy7@connect-io.fr",
+                "remy8@connect-io.fr",
+                "remy9@connect-io.fr"
             ]
         }
     ]

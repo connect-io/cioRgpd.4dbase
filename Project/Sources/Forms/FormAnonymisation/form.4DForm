@@ -246,11 +246,47 @@
 					"sizingX": "grow",
 					"textAlign": "justify",
 					"bottom": 110
+				},
+				"Rectangle2": {
+					"type": "rectangle",
+					"top": 555,
+					"left": 280,
+					"width": 300,
+					"height": 29,
+					"fill": "#21759B",
+					"stroke": "transparent",
+					"borderRadius": 5,
+					"sizingX": "move",
+					"visibility": "hidden"
+				},
+				"Bouton1": {
+					"type": "button",
+					"top": 555,
+					"left": 280,
+					"width": 300,
+					"height": 30,
+					"action": "",
+					"class": "",
+					"stroke": "#FFFFFF",
+					"focusable": false,
+					"text": "Générer des nouveaux enregistrements anonymes",
+					"iconFrames": 4,
+					"style": "custom",
+					"method": "ObjectMethods/Bouton1.4dm",
+					"events": [
+						"onLoad",
+						"onClick",
+						"onMouseMove"
+					],
+					"fontFamily": "Arial",
+					"fontSize": 13,
+					"sizingX": "fixed",
+					"visibility": "hidden"
 				}
 			}
 		}
 	],
-	"geometryStamp": 465,
+	"geometryStamp": 476,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

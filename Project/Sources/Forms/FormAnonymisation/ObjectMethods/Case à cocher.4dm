@@ -11,12 +11,12 @@ If (Bool:C1537(Form:C1466.useParamSave)=True:C214)  // Il faut vérifier qu'une 
 		ALERT:C41("Aucun fichier de sauvegarde n'a été enregistré, vous ne pouvez pas utiliser cette option.")
 	Else 
 		$content_o:=JSON Parse:C1218(Storage:C1525.relation_f.getText())
-		$collection_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue)
+		$collection_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "dataClassList")->currentValue)
 		
 		Form:C1466.useParamSave:=Not:C34(($collection_c.length=0))
 		
 		If ($collection_c.length=0)
-			ALERT:C41("Le fichier de sauvegarde ne contient pas d'élément sauvegardé pour la table « "+OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue+" »")
+			ALERT:C41("Le fichier de sauvegarde ne contient pas d'élément sauvegardé pour la dataclass « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "dataClassList")->currentValue+" »")
 		End if 
 		
 	End if 

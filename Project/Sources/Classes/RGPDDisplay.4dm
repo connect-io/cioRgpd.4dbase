@@ -53,32 +53,32 @@ Historique
 	var $base_o; $content_o : Object
 	var $structureDetail_c; $collection_c; $column_c; $data_c : Collection
 	
-	ASSERT:C1129(Storage:C1525.config#Null:C1517; "La méthode crgpdStart doit être exécuter sur démarrage de la base")
+	ASSERT:C1129(Storage:C1525.config#Null:C1517; "La méthode crgpdStart doit être exécuter avant d'utiliser cette méthode.")
 	
 	crgpdToolNewCollection(->$column_c; ->$data_c; ->$structureDetail_c; ->$collection_c)
 	
 	$base_o:=New object:C1471
 	
 	// Création des colonnes
-	$column_c:=Storage:C1525.config.champ.extract("lib"; "titre")
-	$column_c.unshift(New object:C1471("titre"; "Nom du champ"))
+	$column_c:=Storage:C1525.config.champ.extract("label"; "label")
+	$column_c.unshift(New object:C1471("label"; "Nom du champ"))
 	
 	For ($i_el; 0; Storage:C1525.config.champ.length-1)
-		$base_o[Storage:C1525.config.champ[$i_el].libInCollection]:=False:C215
+		$base_o[Storage:C1525.config.champ[$i_el].lib]:=False:C215
 	End for 
 	
 	// Création des data
-	$structureDetail_c:=This:C1470.getStructureDetail().query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue)
+	$structureDetail_c:=This:C1470.getStructureDetail().query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue)
 	
-	For each ($element_t; $structureDetail_c[0].champ)
-		$data_c.push(OB Copy:C1225(cwToolObjectMerge(New object:C1471("lib"; $element_t); $base_o)))
+	For each ($field4D_t; $structureDetail_c[0].champ)
+		$data_c.push(OB Copy:C1225(cwToolObjectMerge(New object:C1471("field4D"; $field4D_t); $base_o)))
 	End for each 
 	
 	If (Bool:C1537(Form:C1466.useParamSave)=True:C214)
 		$content_o:=JSON Parse:C1218(Storage:C1525.relation_f.getText())
-		$dataField_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue)[0].data
+		$dataField_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue)[0].data
 		For each ($field_o; $dataField_c)
-			$data_c.query("lib IS :1"; $field_o.lib)[0][$field_o.type]:=True:C214
+			$data_c.query("field4D IS :1"; $field_o.field4D)[0][$field_o.libTypeValue]:=True:C214
 		End for each 
 		
 	End if 
@@ -101,12 +101,12 @@ Historique
 			OBJECT SET HORIZONTAL ALIGNMENT:C706(*; "Colonne"+String:C10($i_el); 3)
 		End if 
 		
-		OBJECT SET TITLE:C194(*; "Entête"+String:C10($i_el); $column_c[$i_el-1].titre)
+		OBJECT SET TITLE:C194(*; "Entête"+String:C10($i_el); $column_c[$i_el-1].label)
 	End for 
 	
 	// On redimensionne la fenêtre
 	LISTBOX SET LOCKED COLUMNS:C1151(*; "List Box"; 1)
-	LISTBOX SET COLUMN WIDTH:C833(*; "List Box"; 150)
+	LISTBOX SET COLUMN WIDTH:C833(*; "List Box"; 90)
 	
 	
 	
@@ -164,7 +164,7 @@ Historique
 	
 	If (Storage:C1525.relation_f.exists=True:C214)
 		$content_o:=JSON Parse:C1218(Storage:C1525.relation_f.getText())
-		$collection_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue)
+		$collection_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue)
 		
 		$exist_b:=($collection_c.length>0)
 	End if 

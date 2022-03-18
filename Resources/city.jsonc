@@ -1,0 +1,1054 @@
+/*------------------------------------------------------------------------------
+city.jsonc
+
+Liste d'adresses pour l'anonymisation.
+
+Source
+La Direction de l'information légale et administrative (Premier ministre)
+https://www.data.gouv.fr/fr/datasets/service-public-fr-annuaire-de-l-administration-base-de-donnees-locales/
+
+Historique
+16/03/22 - Grégory Fromain <gregory@connect-io.fr> - Création
+------------------------------------------------------------------------------*/
+
+{
+   "address": [
+      {
+      "line": [
+         "2 bis cours Henri-Pierangeli",
+         "CS 60350"
+      ],
+      "zipCode": "20297",
+      "city": "Bastia Cedex",
+      "latitude": "42.6987815",
+      "longitude": "9.4510685"
+      },
+      {
+      "line": [
+         "1 rue du 23ème Régiment"
+      ],
+      "zipCode": "01001",
+      "city": "Bourg-en-Bresse",
+      "latitude": "46.20754",
+      "longitude": "5.21975"
+      },
+      {
+      "line": [
+         "18 rue John-Fitzgerald-Kennedy",
+         "BP 551"
+      ],
+      "zipCode": "02000",
+      "city": "Laon",
+      "latitude": "49.565077",
+      "longitude": "3.616852"
+      },
+      {
+      "line": [
+         "2 avenue Théodore de Banville"
+      ],
+      "zipCode": "03000",
+      "city": "Moulins",
+      "latitude": "46.564677",
+      "longitude": "3.334514"
+      },
+      {
+      "line": [
+         "Immeuble La Source",
+         "1 rue du Trélus"
+      ],
+      "zipCode": "04000",
+      "city": "Digne-les-Bains",
+      "latitude": "44.089906",
+      "longitude": "6.238738"
+      },
+      {
+      "line": [
+         "10 cours Frédéric Mistral",
+         "CS 96004"
+      ],
+      "zipCode": "05003",
+      "city": "Gap Cedex",
+      "latitude": "44.5571887",
+      "longitude": "6.0751338"
+      },
+      {
+      "line": [
+         "14 avenue Félix-Faure",
+         "CS 11339"
+      ],
+      "zipCode": "06006",
+      "city": "Nice",
+      "latitude": "43.698033",
+      "longitude": "7.271937"
+      },
+      {
+      "line": [
+         "1 bis avenue de Chomérac",
+         "CS 20227"
+      ],
+      "zipCode": "07002",
+      "city": "Privas Cedex",
+      "latitude": "44.73432",
+      "longitude": "4.59786"
+      },
+      {
+      "line": [
+         "18A avenue Georges Corneau",
+         "CS 20278"
+      ],
+      "zipCode": "08013",
+      "city": "Charleville-Mézières Cedex",
+      "latitude": "49.768268",
+      "longitude": "4.722807"
+      },
+      {
+      "line": [
+         "19 boulevard Alsace-Lorraine",
+         "CS 80033"
+      ],
+      "zipCode": "09002",
+      "city": "Foix Cedex",
+      "latitude": "42.961255001351816",
+      "longitude": "1.6069260060819488"
+      },
+      {
+      "line": [
+         "6 boulevard Victor-Hugo",
+         "CS 34083"
+      ],
+      "zipCode": "10014",
+      "city": "Troyes Cedex",
+      "latitude": "48.2943308",
+      "longitude": "4.0678383"
+      },
+      {
+      "line": [
+         "15 Boulevard Omer SARRAUT"
+      ],
+      "zipCode": "11000",
+      "city": "Carcassonne",
+      "latitude": "43.21629",
+      "longitude": "2.35184"
+      },
+      {
+      "line": [
+         "13 boulevard François-Fabié",
+         "CS 73301"
+      ],
+      "zipCode": "12033",
+      "city": "Rodez Cedex 9",
+      "latitude": "44.346651",
+      "longitude": "2.574821"
+      },
+      {
+      "line": [
+         "1 place Estrangin Pastré",
+         "CS 90003"
+      ],
+      "zipCode": "13254",
+      "city": "Marseille",
+      "latitude": "43.289822",
+      "longitude": "5.377427"
+      },
+      {
+      "line": [
+         "14 avenue de Verdun"
+      ],
+      "zipCode": "14000",
+      "city": "Caen",
+      "latitude": "49.179295",
+      "longitude": "-0.359205"
+      },
+      {
+      "line": [
+         "44 boulevard du Pont-Rouge"
+      ],
+      "zipCode": "15000",
+      "city": "Aurillac",
+      "latitude": "44.926453",
+      "longitude": "2.447715"
+      },
+      {
+      "line": [
+         "1 rue du Général Leclerc",
+         "CS 42118"
+      ],
+      "zipCode": "16021",
+      "city": "Angoulême",
+      "latitude": "45.648026",
+      "longitude": "0.157083"
+      },
+      {
+      "line": [
+         "22 rue Réaumur",
+         "CS 40664"
+      ],
+      "zipCode": "17025",
+      "city": "La Rochelle Cedex",
+      "latitude": "46.158399",
+      "longitude": "-1.156573"
+      },
+      {
+      "line": [
+         "18 rue la Fontaine"
+      ],
+      "zipCode": "18000",
+      "city": "Bourges",
+      "latitude": "47.077412",
+      "longitude": "2.388056"
+      },
+      {
+      "line": [
+         "19 avenue Victor Hugo",
+         "BP 1"
+      ],
+      "zipCode": "19001",
+      "city": "Tulle Cedex",
+      "latitude": "45.263428",
+      "longitude": "1.76405"
+      },
+      {
+      "line": [
+         "2-4 place de la Banque",
+         "CS 10426"
+      ],
+      "zipCode": "21004",
+      "city": "Dijon Cedex",
+      "latitude": "47.3243711",
+      "longitude": "5.040469"
+      },
+      {
+      "line": [
+         "11 rue de la Gare",
+         "CS 20310"
+      ],
+      "zipCode": "22003",
+      "city": "Saint-Brieuc Cedex 1",
+      "latitude": "48.510014",
+      "longitude": "-2.7626407"
+      },
+      {
+      "line": [
+         "1 rue Martinet"
+      ],
+      "zipCode": "23000",
+      "city": "Guéret",
+      "latitude": "46.169656",
+      "longitude": "1.871211"
+      },
+      {
+      "line": [
+         "2 place Yves-Guéna",
+         "CS 93081"
+      ],
+      "zipCode": "24009",
+      "city": "Périgueux Cedex",
+      "latitude": "45.187324",
+      "longitude": "0.721435"
+      },
+      {
+      "line": [
+         "19 rue de la Préfecture"
+      ],
+      "zipCode": "25000",
+      "city": "Besançon",
+      "latitude": "47.233725",
+      "longitude": "6.024658"
+      },
+      {
+      "line": [
+         "13 boulevard Bancel",
+         "CS 41021"
+      ],
+      "zipCode": "26010",
+      "city": "Valence",
+      "latitude": "44.931084",
+      "longitude": "4.89322"
+      },
+      {
+      "line": [
+         "26 rue Victor Hugo",
+         "CS 90384"
+      ],
+      "zipCode": "27003",
+      "city": "Evreux Cedex",
+      "latitude": "49.021966",
+      "longitude": "1.145101"
+      },
+      {
+      "line": [
+         "50 boulevard de la Courtille",
+         "CS 10049"
+      ],
+      "zipCode": "28000",
+      "city": "Chartres",
+      "latitude": "48.444081",
+      "longitude": "1.496445"
+      },
+      {
+      "line": [
+         "39 rue du Château"
+      ],
+      "zipCode": "29200",
+      "city": "Brest",
+      "latitude": "48.38582",
+      "longitude": "-4.487308"
+      },
+      {
+      "line": [
+         "2 square du 11-Novembre-1918",
+         "CS 10008"
+      ],
+      "zipCode": "30040",
+      "city": "Nîmes Cedex 1",
+      "latitude": "43.834266662597656",
+      "longitude": "4.361666202545166"
+      },
+      {
+      "line": [
+         "4 rue Deville",
+         "CS 90103"
+      ],
+      "zipCode": "31001",
+      "city": "Toulouse Cedex 6",
+      "latitude": "43.605723",
+      "longitude": "1.440636"
+      },
+      {
+      "line": [
+         "44 rue Victor-Hugo",
+         "CS 30201"
+      ],
+      "zipCode": "32004",
+      "city": "Auch Cedex",
+      "latitude": "43.65026",
+      "longitude": "0.57914"
+      },
+      {
+      "line": [
+         "13 rue Esprit des Lois",
+         "CS 80001"
+      ],
+      "zipCode": "33000",
+      "city": "Bordeaux",
+      "latitude": "44.843423",
+      "longitude": "-0.572246"
+      },
+      {
+      "line": [
+         "98 ter avenue de Lodève"
+      ],
+      "zipCode": "34061",
+      "city": "Montpellier Cedex 2",
+      "latitude": "43.610426",
+      "longitude": "3.853877"
+      },
+      {
+      "line": [
+         "25 rue de la Visitation",
+         "CS 56431"
+      ],
+      "zipCode": "35064",
+      "city": "Rennes Cedex",
+      "latitude": "48.114346",
+      "longitude": "-1.677848"
+      },
+      {
+      "line": [
+         "1 place Colbert",
+         "Bâtiment B"
+      ],
+      "zipCode": "36002",
+      "city": "Châteauroux Cedex",
+      "latitude": "46.810232",
+      "longitude": "1.704168"
+      },
+      {
+      "line": [
+         "2 rue Chanoineau"
+      ],
+      "zipCode": "37922",
+      "city": "Tours Cedex 9",
+      "latitude": "47.3900998",
+      "longitude": "0.6825249"
+      },
+      {
+      "line": [
+         "9 boulevard Édouard-Rey",
+         "CS 80073"
+      ],
+      "zipCode": "38019",
+      "city": "Grenoble Cedex",
+      "latitude": "45.190947",
+      "longitude": "5.724"
+      },
+      {
+      "line": [
+         "13 rue Louis-Rousseau",
+         "BP 424"
+      ],
+      "zipCode": "39006",
+      "city": "Lons-le-Saunier Cedex",
+      "latitude": "46.67156",
+      "longitude": "5.55792"
+      },
+      {
+      "line": [
+         "16 place Pancaut"
+      ],
+      "zipCode": "40000",
+      "city": "Mont-de-Marsan",
+      "latitude": "43.888868",
+      "longitude": "-0.502376"
+      },
+      {
+      "line": [
+         "4 avenue Jean Laigret",
+         "CS 51310"
+      ],
+      "zipCode": "41013",
+      "city": "Blois Cedex",
+      "latitude": "47.5856588",
+      "longitude": "1.3253927"
+      },
+      {
+      "line": [
+         "7 rue d'Arcole",
+         "CS 10501"
+      ],
+      "zipCode": "42007",
+      "city": "Saint-Étienne Cedex 1",
+      "latitude": "45.4403809",
+      "longitude": "4.3844247"
+      },
+      {
+      "line": [
+         "2 bis rue du Pensionnat-Notre-Dame-de-France"
+      ],
+      "zipCode": "43000",
+      "city": "Le Puy-en-Velay",
+      "latitude": "45.03781",
+      "longitude": "3.88172"
+      },
+      {
+      "line": [
+         "14 rue La Fayette",
+         "CS 20725"
+      ],
+      "zipCode": "44007",
+      "city": "Nantes Cedex 1",
+      "latitude": "47.217144",
+      "longitude": "-1.561367"
+      },
+      {
+      "line": [
+         "30 bis rue de la République",
+         "CS 71657"
+      ],
+      "zipCode": "45006",
+      "city": "Orléans",
+      "latitude": "47.905474984043025",
+      "longitude": "1.9048620117385155"
+      },
+      {
+      "line": [
+         "318 rue du Président Wilson",
+         "CS 30179"
+      ],
+      "zipCode": "46003",
+      "city": "Cahors Cedex 9",
+      "latitude": "44.4456647",
+      "longitude": "1.4371707"
+      },
+      {
+      "line": [
+         "68 boulevard Sylvain Dumon",
+         "CS 90000"
+      ],
+      "zipCode": "47916",
+      "city": "Agen cedex",
+      "latitude": "44.20747",
+      "longitude": "0.62284"
+      },
+      {
+      "line": [
+         "4 chemin Saint-Ilpide",
+         "BP 5"
+      ],
+      "zipCode": "48001",
+      "city": "Mende Cedex",
+      "latitude": "44.515931",
+      "longitude": "3.498254"
+      },
+      {
+      "line": [
+         "13 place Pierre-Mendès-France",
+         "CS 74102"
+      ],
+      "zipCode": "49041",
+      "city": "Angers",
+      "latitude": "47.472691",
+      "longitude": "-0.545576"
+      },
+      {
+      "line": [
+         "5 rue Jean Dubois",
+         "CS 35209"
+      ],
+      "zipCode": "50009",
+      "city": "Saint-Lô Cedex",
+      "latitude": "49.114468",
+      "longitude": "-1.089818"
+      },
+      {
+      "line": [
+         "1 place de l’Hôtel-de-Ville",
+         "CS 70017"
+      ],
+      "zipCode": "51722",
+      "city": "Reims Cedex",
+      "latitude": "49.25732",
+      "longitude": "4.032197"
+      },
+      {
+      "line": [
+         "72 F avenue de la République",
+         "CS 12018"
+      ],
+      "zipCode": "52901",
+      "city": "Chaumont Cedex 9",
+      "latitude": "48.0981334",
+      "longitude": "5.1446301"
+      },
+      {
+      "line": [
+         "13 rue Auguste-Beuneux",
+         "CS 10225"
+      ],
+      "zipCode": "53002",
+      "city": "Laval Cedex",
+      "latitude": "48.075246",
+      "longitude": "-0.760812"
+      },
+      {
+      "line": [
+         "CS 70129",
+         "20, boulevard Raymond-Poincaré"
+      ],
+      "zipCode": "55003",
+      "city": "Bar-le-Duc Cedex",
+      "latitude": "48.7760344",
+      "longitude": "5.1570604"
+      },
+      {
+      "line": [
+         "55 avenue Victor-Hugo",
+         "CS 92004"
+      ],
+      "zipCode": "56001",
+      "city": "Vannes",
+      "latitude": "47.662972",
+      "longitude": "-2.756218"
+      },
+      {
+      "line": [
+         "2 rue Chanzy",
+         "CS 31705"
+      ],
+      "zipCode": "54017",
+      "city": "Nancy",
+      "latitude": "48.691054",
+      "longitude": "6.177993"
+      },
+      {
+      "line": [
+         "CS 70129",
+         "20, boulevard Raymond-Poincaré"
+      ],
+      "zipCode": "55003",
+      "city": "Bar-le-Duc Cedex",
+      "latitude": "48.7760344",
+      "longitude": "5.1570604"
+      },
+      {
+      "line": [
+         "12 avenue Robert-Schuman",
+         "CS 20450"
+      ],
+      "zipCode": "57017",
+      "city": "Metz Cedex 01",
+      "latitude": "49.114422",
+      "longitude": "6.173618"
+      },
+      {
+      "line": [
+         "7 bis rue du 13e-de-line"
+      ],
+      "zipCode": "58000",
+      "city": "Nevers",
+      "latitude": "46.991958",
+      "longitude": "3.143164"
+      },
+      {
+      "line": [
+         "69 rue Royale",
+         "CS 30587"
+      ],
+      "zipCode": "59023",
+      "city": "Lille Cedex",
+      "latitude": "50.641755",
+      "longitude": "3.056622"
+      },
+      {
+      "line": [
+         "33 rue des Filatures"
+      ],
+      "zipCode": "60000",
+      "city": "Beauvais",
+      "latitude": "49.430167",
+      "longitude": "2.070436"
+      },
+      {
+      "line": [
+         "26-30 rue du Pont-Neuf"
+      ],
+      "zipCode": "61000",
+      "city": "Alençon",
+      "latitude": "48.42772",
+      "longitude": "0.088835"
+      },
+      {
+      "line": [
+         "1-5 rue Ernestale",
+         "CS 30952"
+      ],
+      "zipCode": "62033",
+      "city": "Arras Cedex",
+      "latitude": "50.2894912",
+      "longitude": "2.7749281"
+      },
+      {
+      "line": [
+         "15 cours Sablon",
+         "CS 40009"
+      ],
+      "zipCode": "63058",
+      "city": "Clermont-Ferrand Cedex 1",
+      "latitude": "45.7741259",
+      "longitude": "3.0901968"
+      },
+      {
+      "line": [
+         "7 rue Louis Barthou",
+         "CS 80408"
+      ],
+      "zipCode": "64004",
+      "city": "Pau Cedex",
+      "latitude": "43.2945125",
+      "longitude": "-0.366874"
+      },
+      {
+      "line": [
+         "3 rue Robert-Destarac"
+      ],
+      "zipCode": "65000",
+      "city": "Tarbes",
+      "latitude": "43.24106",
+      "longitude": "0.07336"
+      },
+      {
+      "line": [
+         "3 place Jean Payra",
+         "CS 60347"
+      ],
+      "zipCode": "66853",
+      "city": "Perpignan Cedex",
+      "latitude": "42.6984882",
+      "longitude": "2.8895963"
+      },
+      {
+      "line": [
+         "3 place Broglie",
+         "CS 20410"
+      ],
+      "zipCode": "67002",
+      "city": "Strasbourg",
+      "latitude": "48.584832",
+      "longitude": "7.749286"
+      },
+      {
+      "line": [
+         "11, rue de la Somme",
+         "CS 71147"
+      ],
+      "zipCode": "68052",
+      "city": "Mulhouse Cedex",
+      "latitude": "47.7469984",
+      "longitude": "7.3415815"
+      },
+      {
+      "line": [
+         "4 bis cours Bayard",
+         "CS 70075"
+      ],
+      "zipCode": "69268",
+      "city": "Lyon",
+      "latitude": "45.745167",
+      "longitude": "4.818383"
+      },
+      {
+      "line": [
+         "21 place Pierre-Rénet"
+      ],
+      "zipCode": "70000",
+      "city": "Vesoul Cedex",
+      "latitude": "47.62107",
+      "longitude": "6.16063"
+      },
+      {
+      "line": [
+         "148 rue du 28-juin-1944",
+         "CS 41210"
+      ],
+      "zipCode": "71010",
+      "city": "Mâcon Cedex",
+      "latitude": "46.31016000933488",
+      "longitude": "4.835711971314481"
+      },
+      {
+      "line": [
+         "2 place Lionel-Lecouteux",
+         "CS 15517"
+      ],
+      "zipCode": "72055",
+      "city": "Le Mans",
+      "latitude": "48.0056312",
+      "longitude": "0.201556"
+      },
+      {
+      "line": [
+         "161 avenue du Comte Vert"
+      ],
+      "zipCode": "73000",
+      "city": "Chambéry",
+      "latitude": "45.57071",
+      "longitude": "5.913886"
+      },
+      {
+      "line": [
+         "9 bis avenue de Chambéry",
+         "CS 50011"
+      ],
+      "zipCode": "74001",
+      "city": "Annecy Cedex",
+      "latitude": "45.8987944",
+      "longitude": "6.1187338"
+      },
+      {
+      "line": [
+         "31 rue Croix-des-Petits-Champs"
+      ],
+      "zipCode": "75049",
+      "city": "Paris Cedex 01",
+      "latitude": "48.8635588",
+      "longitude": "2.3397514"
+      },
+      {
+      "line": [
+         "CS 41834",
+         "3 bis place de la Bastille"
+      ],
+      "zipCode": "75183",
+      "city": "Paris Cedex 4",
+      "latitude": "48.8531365",
+      "longitude": "2.3679415"
+      },
+      {
+      "line": [
+         "32 rue Jean-Lecanuet",
+         "CS 50896"
+      ],
+      "zipCode": "76005",
+      "city": "Rouen Cedex",
+      "latitude": "49.445381",
+      "longitude": "1.091358"
+      },
+      {
+      "line": [
+         "24 rue Saint Ambroise",
+         "CS 60206"
+      ],
+      "zipCode": "77002",
+      "city": "Melun Cedex",
+      "latitude": "48.5338158",
+      "longitude": "2.6568215"
+      },
+      {
+      "line": [
+         "50 boulevard de la Reine",
+         "CS 88404"
+      ],
+      "zipCode": "78004",
+      "city": "Versailles Cedex",
+      "latitude": "48.809203",
+      "longitude": "2.130259"
+      },
+      {
+      "line": [
+         "15 rue Langlois"
+      ],
+      "zipCode": "79000",
+      "city": "Niort",
+      "latitude": "46.3201037",
+      "longitude": "-0.456717"
+      },
+      {
+      "line": [
+         "CAF de la Somme",
+         "9 boulevard Maignan-Larivière"
+      ],
+      "zipCode": "80000",
+      "city": "Amiens",
+      "latitude": "49.889913",
+      "longitude": "2.293389"
+      },
+      {
+      "line": [
+         "17 rue Dominique-de-Florence",
+         "CS 25024"
+      ],
+      "zipCode": "81028",
+      "city": "Albi Cedex 9",
+      "latitude": "43.927861",
+      "longitude": "2.1507205"
+      },
+      {
+      "line": [
+         "37 avenue Gambetta"
+      ],
+      "zipCode": "82000",
+      "city": "Montauban",
+      "latitude": "44.019123",
+      "longitude": "1.359613"
+      },
+      {
+      "line": [
+         "122 avenue Vauban",
+         "CS 60426"
+      ],
+      "zipCode": "83055",
+      "city": "Toulon",
+      "latitude": "43.127012",
+      "longitude": "5.929903"
+      },
+      {
+      "line": [
+         "Site AGROPARC",
+         "25 rue Baruch-de-Spinoza",
+         "CS 50507"
+      ],
+      "zipCode": "84908",
+      "city": "Avignon",
+      "latitude": "43.910364",
+      "longitude": "4.886787"
+      },
+      {
+      "line": [
+         "54 boulevard Aristide-Briand",
+         "CS 30025"
+      ],
+      "zipCode": "85001",
+      "city": "La Roche-sur-Yon Cedex",
+      "latitude": "46.671278",
+      "longitude": "-1.433213"
+      },
+      {
+      "line": [
+         "6 rue Caroline-Aigle",
+         "CS 90000"
+      ],
+      "zipCode": "86067",
+      "city": "Poitiers Cedex 9",
+      "latitude": "46.585664",
+      "longitude": "0.318419"
+      },
+      {
+      "line": [
+         "8 boulevard Carnot",
+         "CS 90414"
+      ],
+      "zipCode": "87012",
+      "city": "Limoges Cedex",
+      "latitude": "45.8321463",
+      "longitude": "1.2614728"
+      },
+      {
+      "line": [
+         "21 avenue Gambetta"
+      ],
+      "zipCode": "88026",
+      "city": "Épinal Cedex",
+      "latitude": "48.169971",
+      "longitude": "6.448362"
+      },
+      {
+      "line": [
+         "1 rue de la Laïcité"
+      ],
+      "zipCode": "89000",
+      "city": "Auxerre",
+      "latitude": "47.79154300121198",
+      "longitude": "3.566678000412253"
+      },
+      {
+      "line": [
+         "1 rue de la Cavalerie"
+      ],
+      "zipCode": "90000",
+      "city": "Belfort",
+      "latitude": "47.640266",
+      "longitude": "6.860796"
+      },
+      {
+      "line": [
+         "23 rue des Mazières",
+         "CS 30045"
+      ],
+      "zipCode": "91002",
+      "city": "Evry Cedex",
+      "latitude": "48.627283",
+      "longitude": "2.433042"
+      },
+      {
+      "line": [
+         "1 rue des Usines Babcock",
+         "CS 40001"
+      ],
+      "zipCode": "93120",
+      "city": "La Courneuve",
+      "latitude": "48.923919",
+      "longitude": "2.392609"
+      },
+      {
+      "line": [
+         "6 place Salvador-Allende",
+         "CS 90031"
+      ],
+      "zipCode": "94010",
+      "city": "Créteil Cedex",
+      "latitude": "48.77882",
+      "longitude": "2.4545"
+      },
+      {
+      "line": [
+         "6 boulevard de l'Oise",
+         "CS 20301",
+         "Le Montaigne"
+      ],
+      "zipCode": "95034",
+      "city": "Cergy-Pontoise",
+      "latitude": "49.035737",
+      "longitude": "2.08272"
+      },
+      {
+      "line": [
+         "Parc d’activité la Providence",
+         "13 boulevard Daniel-Martin"
+      ],
+      "zipCode": "97139",
+      "city": "Les Abymes",
+      "latitude": "16.276497340012018",
+      "longitude": "-61.51121629312758"
+      },
+      {
+      "line": [
+         "1 boulevard du Général-de-Gaulle",
+         "CS 50512"
+      ],
+      "zipCode": "97206",
+      "city": "Fort-de-France Cedex",
+      "latitude": "14.6072147",
+      "longitude": "-61.0678656"
+      },
+      {
+      "line": [
+         "Eau Lisette",
+         "4 rue des Ibis",
+         "BP 276"
+      ],
+      "zipCode": "97306",
+      "city": "Cayenne Cedex",
+      "latitude": "4.9259613",
+      "longitude": "-52.3235676"
+      },
+      {
+      "line": [
+         "4 rue Étienne-Regnault"
+      ],
+      "zipCode": "97487",
+      "city": "Saint-Denis",
+      "latitude": "-20.978011",
+      "longitude": "55.328818"
+      },
+      {
+      "line": [
+         "37 boulevard Constant-Colmay",
+         "BP 4202"
+      ],
+      "zipCode": "97500",
+      "city": "Saint-Pierre",
+      "latitude": "46.785515037816324",
+      "longitude": "-56.16995894642291"
+      },
+      {
+      "line": [
+         "Avenue de la Préfecture",
+         "BP 500"
+      ],
+      "zipCode": "97600",
+      "city": "Mamoudzou",
+      "latitude": "-12.7770592",
+      "longitude": "45.2288204"
+      },
+      {
+      "line": [
+         "21 rue du Docteur-Cassiau",
+         "BP 583"
+      ],
+      "zipCode": "98713",
+      "city": "Papeete",
+      "latitude": "-17.54229879832437",
+      "longitude": "-149.5690255826123"
+      },
+      {
+      "line": [
+         "19 rue de la République",
+         "BP 1758"
+      ],
+      "zipCode": "98845",
+      "city": "Nouméa Cedex",
+      "latitude": "-22.268593138850193",
+      "longitude": "166.44185599781113"
+      },
+      {
+      "line": [
+         "Quartier Havelu-Mata’Utu",
+         "BP G-5"
+      ],
+      "zipCode": "98600",
+      "city": "Uvea - Wallis-et-Futuna",
+      "latitude": "-13.28269285609499",
+      "longitude": "-176.17977794582566"
+      },
+      {
+      "line": [
+         "8 rue Sergent-Casalonga",
+         "BP 315"
+      ],
+      "zipCode": "20177",
+      "city": "Ajaccio Cedex 1",
+      "latitude": "41.9200837",
+      "longitude": "8.7353451"
+      }
+    ]
+  }

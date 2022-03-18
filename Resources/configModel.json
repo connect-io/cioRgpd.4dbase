@@ -1,8 +1,8 @@
 {
     "champ" : [
         {
-            "lib" : "Civilité",
-            "libInCollection" : "civilite",
+            "label" : "Civilité",
+            "lib" : "civilite",
             "type" : "text",
             "value" : [
                 "M.",
@@ -11,8 +11,8 @@
             ]
         },
         {
-            "lib" : "Nom",
-            "libInCollection" : "nom",
+            "label" : "Nom",
+            "lib" : "nom",
             "type" : "text",
             "value" : [
                 "Martin",
@@ -49,8 +49,8 @@
             ]
         },
         {
-            "lib" : "Prénom",
-            "libInCollection" : "prenom",
+            "label" : "Prénom",
+            "lib" : "prenom",
             "type" : "text",
             "value" : [
                 "Léo",
@@ -87,8 +87,8 @@
             ]
         },
         {
-            "lib" : "Date de naissance",
-            "libInCollection" : "dateNaissance",
+            "label" : "Date de naissance",
+            "lib" : "dateNaissance",
             "type" : "date",
             "value" : {
                 "debut" : "01/01/1950",
@@ -96,8 +96,8 @@
             }
         },
         {
-            "lib" : "Adresse complète",
-            "libInCollection" : "adresseComplete",
+            "label" : "Adresse complète",
+            "lib" : "adresseComplete",
             "type" : "text",
             "value" : [
                 "Bd de Parc, 77700 Coupvray",
@@ -126,8 +126,8 @@
             ]
         },
         {
-            "lib" : "Adresse",
-            "libInCollection" : "adresse",
+            "label" : "Adresse",
+            "lib" : "adresse",
             "type" : "text",
             "value" : [
                 "Bd de Parc",
@@ -156,8 +156,8 @@
             ]
         },
         {
-            "lib" : "Code postal",
-            "libInCollection" : "codePostal",
+            "label" : "Code postal",
+            "lib" : "codePostal",
             "type" : "text",
             "value" : [
                 "77700",
@@ -185,8 +185,8 @@
             ]
         },
         {
-            "lib" : "Ville",
-            "libInCollection" : "ville",
+            "label" : "Ville",
+            "lib" : "ville",
             "type" : "text",
             "value" : [
                 "Coupvray",

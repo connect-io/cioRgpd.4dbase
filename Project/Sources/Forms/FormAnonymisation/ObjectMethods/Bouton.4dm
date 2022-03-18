@@ -1,4 +1,4 @@
-var $table_t; $type_t : Text
+var $table_t; $libTypeValue_t : Text
 
 var $element_o; $autreElement_o : Object
 var $collection_c; $relation_c : Collection
@@ -10,7 +10,7 @@ Case of
 		OBJECT SET ENABLED:C1123(*; OBJECT Get name:C1087(Object current:K67:2); False:C215)
 		
 	: (Form event code:C388=On Clicked:K2:4)
-		$table_t:=OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue
+		$table_t:=OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue
 		$anonymize_o:=cs:C1710.Anonymization.new($table_t)
 		
 		// Création d'une collection qui pour chaque champ de la table sélectionnée, on a le type de champ que l'utilisateur a sélectionné
@@ -21,20 +21,20 @@ Case of
 				
 				If (Value type:C1509($autreElement_o.value)=Is boolean:K8:9)
 					If ($autreElement_o.value=True:C214)
-						$type_t:=$autreElement_o.key
+						$libTypeValue_t:=$autreElement_o.key
 					End if 
 				End if 
 				
 			End for each 
 			
-			If ($type_t="")
-				$type_t:="Type par défaut du champ"
+			If ($libTypeValue_t="")
+				$libTypeValue_t:="Type par défaut du champ"
 			End if 
 			
-			$relation_c.push(New object:C1471("lib"; $element_o.lib; "type"; $type_t))
-			CLEAR VARIABLE:C89($type_t)
+			$relation_c.push(New object:C1471("field4D"; $element_o.field4D; "libTypeValue"; $libTypeValue_t))
+			CLEAR VARIABLE:C89($libTypeValue_t)
 		End for each 
-		$relation_c:=$relation_c.query("type # :1"; "Type par défaut du champ")
+		$relation_c:=$relation_c.query("libTypeValue # :1"; "Type par défaut du champ")
 		$anonymize_o.relationUpdate($relation_c)
 		
 		

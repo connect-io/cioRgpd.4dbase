@@ -113,7 +113,7 @@ Historique
 		End if 
 		
 		For each ($type_o; This:C1470.relation_c)
-			$entity_o[$type_o.lib]:=This:C1470.generateValue($type_o; $entity_o[$type_o.lib])
+			$entity_o[$type_o.field4D]:=This:C1470.generateValue($type_o; $entity_o[$type_o.field4D])
 		End for each 
 		
 		$entity_o.save()
@@ -143,11 +143,11 @@ Historiques
 	var $random_el : Integer  // Nombre aléatoire entre 2 dates.
 	var $collection_c : Collection
 	
-	$typeAnonymization_c:=Storage:C1525.config.champ.query("libInCollection = :1"; $type_o.type)
+	$typeAnonymization_c:=Storage:C1525.config.champ.query("lib = :1"; $type_o.libTypeValue)
 	
 	If ($typeAnonymization_c.length=1)
 		
-		If ($type_o.type="dateNaissance")
+		If ($type_o.libTypeValue="dateNaissance")
 			$nbDay_el:=crgpdToolGetNbJour(Date:C102($typeAnonymization_c[0].value.debut); Date:C102($typeAnonymization_c[0].value.fin))
 			$random_el:=(Random:C100%($nbDay_el-0+1))+0
 			

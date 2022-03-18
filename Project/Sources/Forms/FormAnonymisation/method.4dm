@@ -16,17 +16,17 @@ Case of
 		If (Bool:C1537(Form:C1466.loadInit)=True:C214)
 			Form:C1466.useParamSave:=False:C215
 			
-			$collection_c:=$class_o.getStructureDetail()
-			OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->:=New object:C1471("values"; $collection_c.extract("table"); "index"; -1; "currentValue"; "Sélectionnez une table")
+			$collection_c:=$class_o.getStructureDetail().orderBy("table asc")
+			OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->:=New object:C1471("values"; $collection_c.extract("table"); "index"; -1; "currentValue"; "Sélectionnez une dataclasse")
 		End if 
 		
 		If (Bool:C1537(Form:C1466.changeTable)=True:C214)
-			$table_t:=OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue
+			$table_t:=OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue
 			
 			Form:C1466.data:=ds:C1482[$table_t].all()
 			
 			If ($class_o.checkSaveFileExist()=True:C214)
-				OBJECT Get pointer:C1124(Object named:K67:5; "Zone de saisie1")->:="Il existe déjà une sauvegarde du paramétrage pour la table « "+OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue+" »"
+				OBJECT Get pointer:C1124(Object named:K67:5; "Zone de saisie1")->:="Il existe déjà une sauvegarde du paramétrage pour la dataclasse « "+OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue+" »"
 			End if 
 			
 			OBJECT SET VISIBLE:C603(*; "Bouton"; True:C214)

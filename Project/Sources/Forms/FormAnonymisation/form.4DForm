@@ -37,7 +37,7 @@
 					"fontFamily": "Arial",
 					"fontWeight": "normal"
 				},
-				"Popup Liste déroulante": {
+				"dataClassList": {
 					"type": "dropdown",
 					"left": 10,
 					"top": 160,
@@ -46,7 +46,7 @@
 					"events": [
 						"onDataChange"
 					],
-					"method": "ObjectMethods/Popup Liste déroulante.4dm",
+					"method": "ObjectMethods/dataClassList.4dm",
 					"dataSourceTypeHint": "object",
 					"fontSize": 12
 				},
@@ -152,7 +152,7 @@
 					"listboxType": "collection",
 					"movableRows": false,
 					"rowHeight": "30px",
-					"headerHeight": "24px",
+					"headerHeight": "2em",
 					"footerHeight": "10px",
 					"dataSource": "Form:C1466.setDataType",
 					"currentItemSource": "Form:C1466.elementCourant",
@@ -176,7 +176,7 @@
 					"columns": [
 						{
 							"name": "Colonne1",
-							"dataSource": "This:C1470.lib",
+							"dataSource": "This:C1470.field4D",
 							"width": 285,
 							"minWidth": 10,
 							"maxWidth": 32000,
@@ -235,7 +235,7 @@
 				},
 				"Texte2": {
 					"type": "text",
-					"text": "Dans cette fenêtre vous pourrez affecter pour chaque champ un type de champ (Tous les champs de la table que vous avez sélectionnée).\rCe type de champ fait référence au type de champ indiqué dans le fichier de config du composant (Dossier Resources/cioRgpd/config.json) et plus précisement à la propriété « lib ».\r\rExemple « \"lib\" : \"Civilité\" ».",
+					"text": "Dans cette fenêtre vous pourrez affecter pour chaque champ un type de champ (Tous les champs de la table que vous avez sélectionnée).\rCe type de champ fait référence au type de valeur indiqué dans le fichier de config du composant (Dossier Resources/cioRgpd/config.json) et plus précisement à la propriété « lib ».\r\rExemple « \"lib\" : \"Civilité\" ».",
 					"top": 55,
 					"left": 15,
 					"width": 1050,
@@ -250,7 +250,7 @@
 			}
 		}
 	],
-	"geometryStamp": 462,
+	"geometryStamp": 465,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

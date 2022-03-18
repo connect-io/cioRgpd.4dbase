@@ -1,6 +1,6 @@
-//%attributes = {}
+//%attributes = {"shared":true}
 /* -----------------------------------------------------------------------------
-Méthode : crgpdToolGetClass
+Méthode : crGetClass
 
 Renvoie une class vers la base hôte.
 

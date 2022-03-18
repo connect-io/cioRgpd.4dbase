@@ -45,11 +45,11 @@ $typeData_c <- Collection qui contient pour chaque champ le type de donnée atte
 	
 Historique
 17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
+18/03/22 - Grégory Fromain <grégory@connect-io.fr> - Modification de l'appel du fichier des relations.
 ------------------------------------------------------------------------------*/
 	var $element_t; $type_t : Text
 	var $i_el : Integer
 	var $pointeur_p : Pointer
-	var $configSave_o : 4D:C1709.File
 	var $base_o; $content_o : Object
 	var $structureDetail_c; $collection_c; $column_c; $data_c : Collection
 	
@@ -58,7 +58,6 @@ Historique
 	crgpdToolNewCollection(->$column_c; ->$data_c; ->$structureDetail_c; ->$collection_c)
 	
 	$base_o:=New object:C1471
-	$configSave_o:=Folder:C1567(fk dossier ressources:K87:11; *).file("cioRgpd/configSave.json")
 	
 	// Création des colonnes
 	$column_c:=Storage:C1525.config.champ.extract("lib"; "titre")
@@ -69,14 +68,17 @@ Historique
 	End for 
 	
 	// Création des data
+	$structureDetail_c:=This:C1470.getStructureDetail().query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue)
+	
+	For each ($element_t; $structureDetail_c[0].champ)
+		$data_c.push(OB Copy:C1225(cwToolObjectMerge(New object:C1471("lib"; $element_t); $base_o)))
+	End for each 
+	
 	If (Bool:C1537(Form:C1466.useParamSave)=True:C214)
-		$content_o:=JSON Parse:C1218($configSave_o.getText())
-		$data_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue)[0].data
-	Else 
-		$structureDetail_c:=This:C1470.getStructureDetail().query("table = :1"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue)
-		
-		For each ($element_t; $structureDetail_c[0].champ)
-			$data_c.push(OB Copy:C1225(cwToolObjectMerge(New object:C1471("lib"; $element_t); $base_o)))
+		$content_o:=JSON Parse:C1218(Storage:C1525.relation_f.getText())
+		$dataField_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue)[0].data
+		For each ($field_o; $dataField_c)
+			$data_c.query("lib IS :1"; $field_o.lib)[0][$field_o.type]:=True:C214
 		End for each 
 		
 	End if 
@@ -91,7 +93,7 @@ Historique
 	
 	// On créé la Listbox variable en nombre et contenu des colonnes
 	For ($i_el; 1; $column_c.length)
-		$pointeur_p:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Colonne"+String:C10($i_el))
+		$pointeur_p:=OBJECT Get pointer:C1124(Object named:K67:5; "Colonne"+String:C10($i_el))
 		
 		If ($i_el>1)  // Si on est sur la 2° colonne ou plus, on centre le contenu
 			LISTBOX INSERT COLUMN FORMULA:C970(*; "List Box"; $i_el+1; "Colonne"+String:C10($i_el); "This."+$collection_c[$i_el-1]; Value type:C1509(Form:C1466.setDataType[0][$collection_c[$i_el-1]]); "Entête"+String:C10($i_el); $pointeur_p)
@@ -106,51 +108,7 @@ Historique
 	LISTBOX SET LOCKED COLUMNS:C1151(*; "List Box"; 1)
 	LISTBOX SET COLUMN WIDTH:C833(*; "List Box"; 150)
 	
-Function generateValue($type_o : Object; $valueDefaut_v : Variant)->$value_v : Variant
-/*------------------------------------------------------------------------------
-Fonction : RGPDDisplay.generateValue
 	
-Générer une valeur pour anonymiser un champ d'une table
-	
-Paramètres
-$type_o        -> Type de valeur attendue (nom, prénom, adresse etc.)
-$valueDefaut_v -> Valeur par défaut du champ à anonymiser
-$value_v       <- Valeur du champ une fois anonymiser
-	
-Historique
-17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
-------------------------------------------------------------------------------*/
-	var $random_el; $nbJour_el : Integer
-	var $collection_c : Collection
-	var $typeDefaut_v : Variant
-	
-	$collection_c:=Storage:C1525.config.champ.query("libInCollection = :1"; $type_o.type)
-	
-	If ($collection_c.length=1)
-		
-		If ($type_o.type="dateNaissance")
-			$nbJour_el:=crgpdToolGetNbJour(Date:C102($collection_c[0].value.debut); Date:C102($collection_c[0].value.fin))
-			$random_el:=(Random:C100%($nbJour_el-0+1))+0
-			
-			$value_v:=Add to date:C393(Date:C102($collection_c[0].value.debut); 0; 0; $random_el)
-		Else 
-			$random_el:=(Random:C100%($collection_c[0].value.length-1-0+1))+0
-			$value_v:=$collection_c[0].value[$random_el]
-		End if 
-		
-	Else   // Type par défaut du champ
-		$typeDefaut_v:=Value type:C1509($valueDefaut_v)
-		
-		// toDo
-		Case of 
-			: ($typeDefaut_v=Est un texte:K8:3)
-			: ($typeDefaut_v=Est un entier long:K8:6)
-			: ($typeDefaut_v=Est un numérique:K8:4)
-			: ($typeDefaut_v=Est une date:K8:7)
-		End case 
-		
-		$value_v:=$valueDefaut_v
-	End if 
 	
 Function getStructureDetail()->$structureDetail_c : Collection
 /*------------------------------------------------------------------------------
@@ -197,17 +155,16 @@ Paramètre
 	
 Historique
 11/03/22 - Rémy Scanu <remy@connect-io.fr> - Création
+18/03/22 - Grégory Fromain <grégory@connect-io.fr> - Modification de l'appel du fichier des relations.
 ------------------------------------------------------------------------------*/
 	var $content_o : Object
-	var $fichier_o : 4D:C1709.File
 	var $collection_c : Collection
 	
 	$collection_c:=New collection:C1472
-	$fichier_o:=File:C1566(Get 4D folder:C485(Dossier Resources courant:K5:16; *)+"cioRgpd"+Séparateur dossier:K24:12+"configSave.json"; fk chemin plateforme:K87:2)
 	
-	If ($fichier_o.exists=True:C214)
-		$content_o:=JSON Parse:C1218($fichier_o.getText())
-		$collection_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "Popup Liste déroulante")->currentValue)
+	If (Storage:C1525.relation_f.exists=True:C214)
+		$content_o:=JSON Parse:C1218(Storage:C1525.relation_f.getText())
+		$collection_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "Popup Liste déroulante")->currentValue)
 		
 		$exist_b:=($collection_c.length>0)
 	End if 
@@ -232,7 +189,7 @@ Historique
 	var $pointeur_p : Pointer
 	
 	For each ($objet_t; $objet_c)
-		$pointeur_p:=OBJECT Get pointer:C1124(Objet nommé:K67:5; $objet_t)
+		$pointeur_p:=OBJECT Get pointer:C1124(Object named:K67:5; $objet_t)
 		
 		If (Is nil pointer:C315($pointeur_p)=False:C215)
 			OBJECT GET COORDINATES:C663(*; $objet_t; $gauche_el; $haut_el; $droite_el; $bas_el)

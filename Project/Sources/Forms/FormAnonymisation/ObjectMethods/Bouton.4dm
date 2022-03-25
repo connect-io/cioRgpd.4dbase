@@ -1,15 +1,16 @@
 var $table_t; $libTypeValue_t : Text
 
-var $anonymize_o; $dataType_o; $autreElement_o : Object
+var $dataType_o; $autreElement_o : Object
 var $dataType_c; $relation_c : Collection
+var $anonymize_o : cs:C1710.Anonymization
 
 crgpdToolNewCollection(->$dataType_c; ->$relation_c)
 
 Case of 
-	: (Form event code:C388=Sur chargement:K2:1)
-		OBJECT SET ENABLED:C1123(*; OBJECT Get name:C1087(Objet courant:K67:2); False:C215)
-	: (Form event code:C388=Sur clic:K2:4)
-		$table_t:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "dataClassList")->currentValue
+	: (Form event code:C388=On Load:K2:1)
+		OBJECT SET ENABLED:C1123(*; OBJECT Get name:C1087(Object current:K67:2); False:C215)
+	: (Form event code:C388=On Clicked:K2:4)
+		$table_t:=OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue
 		$anonymize_o:=cs:C1710.Anonymization.new($table_t)
 		
 		// Création d'une collection qui pour chaque champ de la table sélectionnée, on a le type de champ que l'utilisateur a sélectionné
@@ -18,7 +19,7 @@ Case of
 			
 			For each ($autreElement_o; $dataType_c) Until (Bool:C1537($autreElement_o.value)=True:C214)
 				
-				If (Value type:C1509($autreElement_o.value)=Est un booléen:K8:9)
+				If (Value type:C1509($autreElement_o.value)=Is boolean:K8:9)
 					
 					If ($autreElement_o.value=True:C214)
 						$libTypeValue_t:=$autreElement_o.key
@@ -51,10 +52,11 @@ Case of
 			
 			If (OK=1)
 				$anonymize_o.go()
+				ALERT:C41("L'anonymisation de la dataclasse « "+$table_t+" » est terminée")
 			End if 
 			
 		End if 
 		
-	: (Form event code:C388=Sur survol:K2:35)
+	: (Form event code:C388=On Mouse Move:K2:35)
 		SET CURSOR:C469(9000)
 End case 

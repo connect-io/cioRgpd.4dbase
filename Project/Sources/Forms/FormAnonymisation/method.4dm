@@ -1,5 +1,5 @@
 var $table_t : Text
-var $class_o : Object
+var $class_o : cs:C1710.RGPDDisplay
 var $collection_c : Collection
 
 Case of 
@@ -26,6 +26,7 @@ Case of
 			Form:C1466.data:=ds:C1482[$table_t].all()
 			
 			If ($class_o.checkSaveFileExist()=True:C214)
+				Form:C1466.useParamSave:=True:C214
 				OBJECT Get pointer:C1124(Objet nommé:K67:5; "Zone de saisie1")->:="Il existe déjà une sauvegarde du paramétrage pour la dataclasse « "+OBJECT Get pointer:C1124(Objet nommé:K67:5; "dataClassList")->currentValue+" »"
 			End if 
 			

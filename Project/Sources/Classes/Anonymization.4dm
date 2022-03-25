@@ -93,7 +93,8 @@ Historique
 	var $type_o : Object
 	var progressBar_el : Integer
 	
-	crgpdToolProgressBar(0; "Initialisation"; True:C214; "anonyme")
+/*$process1_el:=New process("_testProcess"; 0; "Process1"; This.data_es.slice(0; (This.data_es.length/2)); This.relation_c; This.dataClass_t)
+$process2_el:=New process("_testProcess"; 0; "Process2"; This.data_es.slice((This.data_es.length/2)+1); This.relation_c; This.dataClass_t)*/
 	
 	For each ($entity_o; This:C1470.data_es) Until (progressBar_el=0)
 		
@@ -107,8 +108,6 @@ Historique
 		
 		$entity_o.save()
 	End for each 
-	
-	crgpdToolProgressBar(1; "arrêt")
 	
 Function generateValue($type_o : Object; $valueDefaut_v : Variant)->$value_v : Variant
 /*------------------------------------------------------------------------------

@@ -23,7 +23,7 @@ If (Bool:C1537(Form:C1466.useParamSave)=True:C214)  // Il faut vérifier qu'une 
 	
 End if 
 
-If (Form:C1466.useParamSave=True:C214)
+If (Bool:C1537(Form:C1466.useParamSave)=True:C214)
 	Form:C1466.changeTable:=True:C214
 	
 	POST OUTSIDE CALL:C329(Current process:C322)

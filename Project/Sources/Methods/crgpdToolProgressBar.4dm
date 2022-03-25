@@ -19,7 +19,6 @@ Case of
 		C_LONGINT:C283(progressBar_el)
 		
 		progressBar_el:=Progress New  // on crée une nouvelle barre
-		
 		Progress SET BUTTON ENABLED(progressBar_el; $3)
 		
 		If (Count parameters:C259=4)

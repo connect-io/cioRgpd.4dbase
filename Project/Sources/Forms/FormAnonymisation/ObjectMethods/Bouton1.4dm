@@ -1,6 +1,6 @@
 var $table_t : Text
 var $nbNewRecord_el; $i_el : Integer
-var $avatarPerson_o : Object
+var $avatarPerson_o : cs:C1710.avatarPerson
 
 Case of 
 	: (Form event code:C388=Sur chargement:K2:1)

@@ -247,5 +247,40 @@
                 "remy9@connect-io.fr"
             ]
         }
-    ]
+    ],
+    "info" : {
+        "entreprise" : {
+            "nom" : "",
+            "siret" : "",
+            "raisonSociale" : ""
+        },
+        "responsableOrganisme" : {
+            "nom" : "",
+            "prenom" : "",
+            "adresse" : "",
+            "codePostal" : "",
+            "ville" : "",
+            "email" : "",
+            "telephone" : ""
+        },
+        "representant" : {
+            "nom" : "",
+            "prenom" : "",
+            "adresse" : "",
+            "codePostal" : "",
+            "ville" : "",
+            "email" : "",
+            "telephone" : ""
+        },
+        "delegueRGPD" : {
+            "nom" : "",
+            "prenom" : "",
+            "adresse" : "",
+            "codePostal" : "",
+            "ville" : "",
+            "email" : "",
+            "telephone" : "",
+            "societeDPOExterne" : ""
+        }
+    }
 }

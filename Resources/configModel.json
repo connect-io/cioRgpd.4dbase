@@ -84,12 +84,57 @@
             ]
         },
         {
+            "label" : "Nom et Prénom",
+            "lib" : "nomPrenom",
+            "value" : []
+        },
+        {
             "label" : "Date de naissance",
             "lib" : "dateNaissance",
             "value" : {
                 "debut" : "01/01/1950",
                 "fin" : "31/12/2000"
             }
+        },
+        {
+            "label" : "Nom d'entreprise",
+            "lib" : "nomEntreprise",
+            "value" : [
+                "TotalEnergies",
+                "Axa",
+                "Groupe Carrefour",
+                "Crédit agricole",
+                "BNP Paribas",
+                "Electricité de France",
+                "Engie",
+                "Renault",
+                "Auchan",
+                "Société générale",
+                "Christian Dior",
+                "Vinci",
+                "Finatis",
+                "Coca-Cola",
+                "Macdonalds",
+                "Sanofi",
+                "Bouygues",
+                "Samsung",
+                "Apple",
+                "Amazon",
+                "Google",
+                "Facebook",
+                "CNP Assurances",
+                "Renault",
+                "Louis Vuitton",
+                "Airbus",
+                "Peugeot",
+                "Orange",
+                "SNCF",
+                "Safran",
+                "Danone",
+                "Thales",
+                "Decathlon",
+                "Aldi"
+            ]
         },
         {
             "label" : "Adresse complète",
@@ -250,20 +295,9 @@
     ],
     "info" : {
         "entreprise" : {
-            "nom" : "",
-            "siret" : "",
-            "raisonSociale" : ""
+            "nom" : ""
         },
         "responsableOrganisme" : {
-            "nom" : "",
-            "prenom" : "",
-            "adresse" : "",
-            "codePostal" : "",
-            "ville" : "",
-            "email" : "",
-            "telephone" : ""
-        },
-        "representant" : {
             "nom" : "",
             "prenom" : "",
             "adresse" : "",

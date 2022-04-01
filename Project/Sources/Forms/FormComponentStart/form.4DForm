@@ -24,7 +24,7 @@
 			"objects": {
 				"Rectangle1": {
 					"type": "rectangle",
-					"top": 313,
+					"top": 284,
 					"left": 435,
 					"width": 220,
 					"height": 29,
@@ -34,7 +34,7 @@
 				},
 				"Rectangle": {
 					"type": "rectangle",
-					"top": 313,
+					"top": 284,
 					"left": 200,
 					"width": 220,
 					"height": 29,
@@ -68,7 +68,7 @@
 					"top": 73,
 					"left": 200,
 					"width": 455,
-					"height": 193,
+					"height": 120,
 					"stroke": "#696969",
 					"class": "",
 					"text": "Le composant cioRgpd permet d'anonymiser une base de donnée 4D pour être en confirmité avec les règles européenne de la RGPD. Il permet également de générer des fiches aléatoires d'une personne.",
@@ -78,7 +78,7 @@
 				},
 				"Texte2": {
 					"type": "text",
-					"top": 289,
+					"top": 260,
 					"left": 200,
 					"width": 368,
 					"height": 19,
@@ -90,7 +90,7 @@
 				},
 				"Bouton": {
 					"type": "button",
-					"top": 313,
+					"top": 284,
 					"left": 200,
 					"width": 220,
 					"height": 30,
@@ -111,7 +111,7 @@
 				},
 				"Bouton1": {
 					"type": "button",
-					"top": 313,
+					"top": 284,
 					"left": 435,
 					"width": 220,
 					"height": 30,
@@ -190,11 +190,42 @@
 					"loopBackToFirstFrame": true,
 					"switchBackWhenReleased": true,
 					"useLastFrameAsDisabled": true
+				},
+				"Rectangle2": {
+					"type": "rectangle",
+					"top": 323,
+					"left": 198,
+					"width": 220,
+					"height": 29,
+					"fill": "#21759B",
+					"stroke": "transparent",
+					"borderRadius": 5
+				},
+				"Bouton2": {
+					"type": "button",
+					"top": 323,
+					"left": 198,
+					"width": 220,
+					"height": 30,
+					"action": "",
+					"class": "",
+					"stroke": "#FFFFFF",
+					"focusable": false,
+					"text": "Imprimer le registre",
+					"iconFrames": 4,
+					"style": "custom",
+					"method": "ObjectMethods/Bouton2.4dm",
+					"events": [
+						"onClick",
+						"onMouseMove"
+					],
+					"fontFamily": "Arial",
+					"fontSize": 12
 				}
 			}
 		}
 	],
-	"geometryStamp": 167,
+	"geometryStamp": 175,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

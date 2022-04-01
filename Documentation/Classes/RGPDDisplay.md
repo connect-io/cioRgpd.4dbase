@@ -6,12 +6,9 @@ Gestion du formulaire d'anonymisation d'une base donnée 4D
 
 ### Accès aux fonctions
 * [Fonction : constructor](#fonction--constructor)
-* [Fonction : applyValue](#fonction--applyValue)
+* [Fonction : checkSaveFileExist](#fonction--checkSaveFileExist)
 * [Fonction : chooseTypeData](#fonction--chooseTypeData)
-* [Fonction : generateValue](#fonction--generateValue)
-* [Fonction : getData](#fonction--getData)
-* [Fonction : resizeFullWidth](#fonction--resizeFullWidth)
-* [Fonction : resizeWindows](#fonction--resizeWindows)
+* [Fonction : getStructureDetail](#fonction--getStructureDetail)
 
 --------------------------------------------------------------------------------
 
@@ -33,25 +30,23 @@ class_o := crgpdToolGetClass("RGPDDisplay").new()
 
 --------------------------------------------------------------------------------
 
-## Fonction : applyValue
-Applique une valeur aléatoire pour anonymiser un champ d'une table
+## Fonction : checkSaveFileExist
+Permet de savoir si dans le fichier de relation du composant il existe déjà
+un traitement d'anonymisation effectué pour la table sélectionnée
 
 ### Fonctionnement
 ```4d
-class_o.applyValue($enregistrement_o; $element_o; $type_o)
+class_o.checkSaveFileExist()
 ```
 
-| Paramètre         | Type       | entrée/sortie | Description |
-| ----------------- | ---------- | ------------- | ----------- |
-| $enregistrement_o | Objet      | Entrée        | Entité à anonymiser |
-| $element_o        | Objet      | Entrée        | Element construit avec la méthode getData() |
-| $type_o           | Objet      | Entrée        | Type de valeur attendue |
+| Paramètre   | Type       | entrée/sortie | Description |
+| ----------- | ---------- | ------------- | ----------- |
 
 
 
 ### Example
 ```4d
-class_o.applyValue()
+class_o.checkSaveFileExist()
 ```
 
 --------------------------------------------------------------------------------
@@ -66,13 +61,33 @@ class_o.chooseTypeData()
 
 | Paramètre   | Type       | entrée/sortie | Description |
 | ----------- | ---------- | ------------- | ----------- |
-| $typeData_c | Collection | Sortie        | Collection qui contient pour chaque champ le type de valeur attendu |
 
 
 
 ### Example
 ```4d
 class_o.chooseTypeData()
+```
+
+--------------------------------------------------------------------------------
+
+## Fonction : getStructureDetail
+Permet d'obtenir une collection avec le détail de la structure du client (table/champ)
+
+### Fonctionnement
+```4d
+class_o.getStructureDetail()
+```
+
+| Paramètre          | Type       | entrée/sortie | Description |
+| ------------------ | ---------- | ------------- | ----------- |
+| $structureDetail_c | Collection | Sortie        | Collection qui contient le détail de la structure du client |
+
+
+
+### Example
+```4d
+class_o.getStructureDetail()
 ```
 
 --------------------------------------------------------------------------------

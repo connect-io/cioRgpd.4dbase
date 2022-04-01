@@ -1,10 +1,35 @@
 /*------------------------------------------------------------------------------
 Class : cs.RGPDDisplay
 
-Class de gestion du formulaire d'anonymisation
+Gestion du formulaire d'anonymisation d'une base donnée 4D
 
 ------------------------------------------------------------------------------*/
 
+Function checkSaveFileExist()->$exist_b : Boolean
+/*------------------------------------------------------------------------------
+Fonction : RGPDDisplay.checkSaveFileExist
+	
+Permet de savoir si dans le fichier de relation du composant il existe déjà
+un traitement d'anonymisation effectué pour la table sélectionnée
+	
+Paramètre
+	
+Historique
+11/03/22 - Rémy Scanu <remy@connect-io.fr> - Création
+18/03/22 - Grégory Fromain <grégory@connect-io.fr> - Modification de l'appel du fichier des relations.
+------------------------------------------------------------------------------*/
+	var $content_o : Object
+	var $collection_c : Collection
+	
+	$collection_c:=New collection:C1472
+	
+	If (Storage:C1525.relation_f.exists=True:C214)
+		$content_o:=JSON Parse:C1218(Storage:C1525.relation_f.getText())
+		$collection_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue)
+		
+		$exist_b:=($collection_c.length>0)
+	End if 
+	
 Function chooseTypeData()
 /*------------------------------------------------------------------------------
 Fonction : RGPDDisplay.chooseTypeData
@@ -12,7 +37,6 @@ Fonction : RGPDDisplay.chooseTypeData
 Permet de faire matcher un champ avec un type de valeur attendue (nom, prénom etc.)
 	
 Paramètre
-$typeData_c <- Collection qui contient pour chaque champ le type de donnée attendu
 	
 Historique
 17/02/22 - Rémy Scanu <remy@connect-io.fr> - Création
@@ -39,7 +63,7 @@ Historique
 	End for 
 	
 	// Création des data
-	$structureDetail_c:=This:C1470.getStructureDetail().query("table = :1"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "dataClassList")->currentValue)
+	$structureDetail_c:=This:C1470.getStructureDetail().query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue)
 	
 	For each ($field4D_t; $structureDetail_c[0].champ)
 		$data_c.push(OB Copy:C1225(cwToolObjectMerge(New object:C1471("field4D"; $field4D_t); $base_o)))
@@ -47,7 +71,8 @@ Historique
 	
 	If (Bool:C1537(Form:C1466.useParamSave)=True:C214)
 		$content_o:=JSON Parse:C1218(Storage:C1525.relation_f.getText())
-		$dataField_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "dataClassList")->currentValue)[0].data
+		$dataField_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Object named:K67:5; "dataClassList")->currentValue)[0].data
+		
 		For each ($field_o; $dataField_c)
 			$data_c.query("field4D IS :1"; $field_o.field4D)[0][$field_o.libTypeValue]:=True:C214
 		End for each 
@@ -64,7 +89,7 @@ Historique
 	
 	// On créé la Listbox variable en nombre et contenu des colonnes
 	For ($i_el; 1; $column_c.length)
-		$pointeur_p:=OBJECT Get pointer:C1124(Objet nommé:K67:5; "Colonne"+String:C10($i_el))
+		$pointeur_p:=OBJECT Get pointer:C1124(Object named:K67:5; "Colonne"+String:C10($i_el))
 		
 		If ($i_el>1)  // Si on est sur la 2° colonne ou plus, on centre le contenu
 			LISTBOX INSERT COLUMN FORMULA:C970(*; "List Box"; $i_el+1; "Colonne"+String:C10($i_el); "This."+$collection_c[$i_el-1]; Value type:C1509(Form:C1466.setDataType[0][$collection_c[$i_el-1]]); "Entête"+String:C10($i_el); $pointeur_p)
@@ -77,7 +102,7 @@ Historique
 	
 	// On redimensionne la fenêtre
 	LISTBOX SET LOCKED COLUMNS:C1151(*; "List Box"; 1)
-	LISTBOX SET COLUMN WIDTH:C833(*; "List Box"; 90)
+	LISTBOX SET COLUMN WIDTH:C833(*; "List Box"; 120)
 	
 Function getStructureDetail()->$structureDetail_c : Collection
 /*------------------------------------------------------------------------------
@@ -112,28 +137,3 @@ Historique
 		End if 
 		
 	End for 
-	
-Function checkSaveFileExist()->$exist_b : Boolean
-/*------------------------------------------------------------------------------
-Fonction : RGPDDisplay.checkSaveFileExist
-	
-Permet de savoir si dans le fichier de sauvegarde du composant il existe déjà
-une correspondance entre la table et le champ sélectionné
-	
-Paramètre
-	
-Historique
-11/03/22 - Rémy Scanu <remy@connect-io.fr> - Création
-18/03/22 - Grégory Fromain <grégory@connect-io.fr> - Modification de l'appel du fichier des relations.
-------------------------------------------------------------------------------*/
-	var $content_o : Object
-	var $collection_c : Collection
-	
-	$collection_c:=New collection:C1472
-	
-	If (Storage:C1525.relation_f.exists=True:C214)
-		$content_o:=JSON Parse:C1218(Storage:C1525.relation_f.getText())
-		$collection_c:=$content_o.detail.query("table = :1"; OBJECT Get pointer:C1124(Objet nommé:K67:5; "dataClassList")->currentValue)
-		
-		$exist_b:=($collection_c.length>0)
-	End if 

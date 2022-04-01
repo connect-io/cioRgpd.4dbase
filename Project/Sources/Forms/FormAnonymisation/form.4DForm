@@ -50,38 +50,6 @@
 					"dataSourceTypeHint": "object",
 					"fontSize": 12
 				},
-				"Case à cocher": {
-					"type": "checkbox",
-					"text": "Utiliser les paramètres sauvegardés",
-					"top": 195,
-					"left": 10,
-					"width": 250,
-					"height": 25,
-					"events": [
-						"onClick"
-					],
-					"dataSourceTypeHint": "boolean",
-					"fontSize": 12,
-					"dataSource": "Form:C1466.useParamSave",
-					"method": "ObjectMethods/Case à cocher.4dm",
-					"fontWeight": "normal",
-					"fontFamily": "Arial"
-				},
-				"Zone de saisie1": {
-					"type": "input",
-					"left": 10,
-					"top": 230,
-					"width": 250,
-					"height": 120,
-					"enterable": false,
-					"focusable": false,
-					"contextMenu": "none",
-					"fontWeight": "normal",
-					"fontFamily": "Arial",
-					"fontSize": 12,
-					"fill": "transparent",
-					"borderStyle": "none"
-				},
 				"Rectangle": {
 					"type": "rectangle",
 					"top": 555,
@@ -282,47 +250,11 @@
 					"fontSize": 13,
 					"sizingX": "fixed",
 					"visibility": "hidden"
-				},
-				"Rectangle3": {
-					"type": "rectangle",
-					"top": 555,
-					"left": 780,
-					"width": 175,
-					"height": 30,
-					"fill": "#21759B",
-					"stroke": "transparent",
-					"borderRadius": 5,
-					"sizingX": "move",
-					"visibility": "hidden"
-				},
-				"Bouton2": {
-					"type": "button",
-					"top": 555,
-					"left": 780,
-					"width": 175,
-					"height": 30,
-					"action": "",
-					"class": "",
-					"stroke": "#FFFFFF",
-					"focusable": false,
-					"text": "Sauvegarder les paramètres",
-					"iconFrames": 4,
-					"style": "custom",
-					"method": "ObjectMethods/Bouton2.4dm",
-					"events": [
-						"onLoad",
-						"onClick",
-						"onMouseMove"
-					],
-					"fontFamily": "Arial",
-					"fontSize": 13,
-					"sizingX": "move",
-					"visibility": "hidden"
 				}
 			}
 		}
 	],
-	"geometryStamp": 502,
+	"geometryStamp": 504,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

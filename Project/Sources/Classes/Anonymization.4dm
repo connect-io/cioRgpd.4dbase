@@ -43,6 +43,9 @@ Historiques
 	var $relationFileContent_o : Object
 	var $relationTable_c; $collection_c; $typeAnonymization_c : Collection
 	
+	var type_el; length_el;  : Integer
+	var index_b; unique_b; invisible_b : Boolean
+	
 	crgpdToolNewCollection(->$relationTable_c; ->$collection_c; ->$typeAnonymization_c)
 	$typeAnonymization_c:=Storage:C1525.config.champ.query("lib = :1"; $type_o.libTypeValue)
 	
@@ -98,6 +101,13 @@ Historiques
 			Else 
 				$random_el:=(Random:C100%($typeAnonymization_c[0].value.length-1-0+1))+0
 				$value_v:=$typeAnonymization_c[0].value[$random_el]
+				
+				EXECUTE FORMULA:C63("LIRE PROPRIETES CHAMP:C258(->["+This:C1470.dataClass_t+"]"+$type_o.field4D+";type_el;length_el;index_b;unique_b;invisible_b)")
+				
+				If (unique_b=True:C214)
+					$value_v:=$value_v+Substring:C12(Generate UUID:C1066; 1; 5)
+				End if 
+				
 		End case 
 		
 	Else   // Type par défaut du champ

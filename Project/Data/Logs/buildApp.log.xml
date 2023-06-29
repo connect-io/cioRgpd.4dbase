@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml-stylesheet type = "text/css" href="BuildLogStyleSheet.css"?>
+<BuildApplicationLog>
+
+  <Log>
+    <MessageType>Comment</MessageType>
+    <Target>Component</Target>
+    <CodeDesc>NO_ERR</CodeDesc>
+    <CodeId>0</CodeId>
+    <Message>Début de compilation [2023-03-29T17:45:19]</Message>
+  </Log>
+
+  <Log>
+    <MessageType>Comment</MessageType>
+    <Target>Common</Target>
+    <CodeDesc>NO_ERR</CodeDesc>
+    <CodeId>0</CodeId>
+    <Message>Début de copie des fichiers : Y:\Documents\GitHub\cioRgpd_Build\Components\cioRgpd.4dbase\cioRgpd.4DZ</Message>
+  </Log>
+
+  <Log>
+    <MessageType>Comment</MessageType>
+    <Target>Common</Target>
+    <CodeDesc>NO_ERR</CodeDesc>
+    <CodeId>0</CodeId>
+    <Message>Fin de copie des fichiers : Y:\Documents\GitHub\cioRgpd_Build\Components\cioRgpd.4dbase\cioRgpd.4DZ</Message>
+  </Log>
+
+  <Log>
+    <MessageType>Comment</MessageType>
+    <Target>Component</Target>
+    <CodeDesc>NO_ERR</CodeDesc>
+    <CodeId>0</CodeId>
+    <Message>Fin de compilation [2023-03-29T17:45:19]</Message>
+  </Log>
+
+</BuildApplicationLog>

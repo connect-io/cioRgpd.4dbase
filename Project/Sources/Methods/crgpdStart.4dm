@@ -10,14 +10,17 @@ Historique
 var $i_el; $j_el : Integer
 var $blob_b : Blob
 var $image_i : Picture
+var $content_o : Object
+
 var $configFile_o; $imageFile_o; $personFile_o : 4D:C1709.File
 
 // Chargement des images
 Use (Storage:C1525)
 	Storage:C1525.image:=New shared object:C1526()
+	Storage:C1525.config:=New shared object:C1526()
 End use 
 
-For each ($imageFile_o; Folder:C1567(fk dossier ressources:K87:11).folder("Images").files(fk ignorer invisibles:K87:22))
+For each ($imageFile_o; Folder:C1567(fk resources folder:K87:11).folder("Images").files(fk ignore invisible:K87:22))
 	// Obliger de faire comme ça car BLOB VERS IMAGE($imageFile_o.getContent(); $image_i) ne fonctionne pas
 	$blob_b:=$imageFile_o.getContent()
 	BLOB TO PICTURE:C682($blob_b; $image_i)
@@ -29,19 +32,20 @@ For each ($imageFile_o; Folder:C1567(fk dossier ressources:K87:11).folder("Image
 End for each 
 
 // Chargement du fichier de config
-$configFile_o:=Folder:C1567(fk dossier ressources:K87:11; *).file("cioRgpd/config.json")
+$configFile_o:=Folder:C1567(fk resources folder:K87:11; *).file("cioRgpd/config.json")
 
 If (Not:C34($configFile_o.exists))  // Il n'existe pas de fichier de config dans la base hote, on le génère.
-	Folder:C1567(fk dossier ressources:K87:11).file("configModel.json").copyTo($configFile_o.parent; $configFile_o.fullName)
+	Folder:C1567(fk resources folder:K87:11).file("configModel.json").copyTo($configFile_o.parent; $configFile_o.fullName)
 End if 
 
 Use (Storage:C1525)
-	Storage:C1525.config:=OB Copy:C1225(JSON Parse:C1218($configFile_o.getText()); ck shared:K85:29; Storage:C1525)
+	$content_o:=JSON Parse:C1218($configFile_o.getText())
+	Storage:C1525.config:=OB Copy:C1225($content_o; ck shared:K85:29; Storage:C1525.config)
 End use 
 
 // Chargement du fichier des relations si il n'existe pas...
 Use (Storage:C1525)
-	Storage:C1525.relation_f:=Folder:C1567(fk dossier ressources:K87:11; *).file("cioRgpd/relation.json")
+	Storage:C1525.relation_f:=Folder:C1567(fk resources folder:K87:11; *).file("cioRgpd/relation.json")
 End use 
 
 If (Storage:C1525.relation_f.exists=False:C215)
@@ -51,11 +55,11 @@ End if
 
 // Chargement des fichiers nécessaires pour la création de profil aléatoire
 Use (Storage:C1525)
-	Storage:C1525.person_f:=Folder:C1567(fk dossier ressources:K87:11; *).file("cioRgpd/person.jsonc")
+	Storage:C1525.person_f:=Folder:C1567(fk resources folder:K87:11; *).file("cioRgpd/person.jsonc")
 End use 
 
 If (Storage:C1525.person_f.exists=False:C215)
-	Folder:C1567(fk dossier ressources:K87:11).file("person.jsonc").copyTo(Storage:C1525.person_f.parent; Storage:C1525.person_f.fullName)
+	Folder:C1567(fk resources folder:K87:11).file("person.jsonc").copyTo(Storage:C1525.person_f.parent; Storage:C1525.person_f.fullName)
 End if 
 
 // Chargement du détail de la structure de la base hôte
